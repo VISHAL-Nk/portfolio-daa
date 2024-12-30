@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,12 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/image.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/components/team-card.css">
+    <link rel="stylesheet" href="css/components/city-design.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-container">
@@ -45,8 +49,10 @@
         <!-- Project Overview -->
         <section id="overview" class="project-overview slide-in">
             <h2>Project Overview</h2>
-            <p>The Mangalore Smart City project aims to transform Mangalore into a sustainable, technologically advanced urban center. Our comprehensive approach integrates smart solutions across various sectors including transportation, waste management, and energy distribution.</p>
-            
+            <p>The Mangalore Smart City project aims to transform Mangalore into a sustainable, technologically advanced
+                urban center. Our comprehensive approach integrates smart solutions across various sectors including
+                transportation, waste management, and energy distribution.</p>
+
             <div class="features">
                 <h3>Key Features</h3>
                 <ul class="features-grid"></ul>
@@ -57,47 +63,67 @@
         <section id="team" class="team-section slide-in">
             <div class="header">
                 <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="graduation-cap">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                        <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="graduation-cap">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c3 3 9 3 12 0v-5" />
                     </svg>
                 </div>
                 <h2>Team Members</h2>
                 <div class="underline"></div>
             </div>
             <div class="team-grid">
-        </div>
+            </div>
+        </section>
+        <!-- City Design -->
+        <section id="city-design" class="city-design-section slide-in">
+            <div class="header">
+                <h2>City Design</h2>
+                <div class="underline"></div>
+            </div>
+
+            <div class="city-design-container" style="position: relative; width: 100%; height: 100%;">
+                <div class="city-design">
+                    <div class="city-grid"></div>
+                    <img src="City.jpeg" alt="Mangalore City Map" class="city-map">
+                </div>
+            </div>
+
         </section>
         <!-- Business Model -->
         <section id="budget" class="budget-section slide-in">
-        <div class="header">
-            <h2>Budget Allocation</h2>
-            <div class="underline"></div>
-        </div>
-        <div class="table-container">
-            <table class="budget-table">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Budget (in crores)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Budget data will be populated here -->
-                </tbody>
-                <tfoot>
-                    <tr class="total-row">
-                        <td>Total Estimated Budget</td>
-                        <td id="total-budget">0</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+            <div class="header">
+                <h2>Budget Allocation</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="table-container">
+                <table class="budget-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Budget (in crores)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Budget data will be populated here -->
+                    </tbody>
+                    <tfoot>
+                        <tr class="total-row">
+                            <td>Total Estimated Budget</td>
+                            <td id="total-budget">0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
     </main>
 
     <script src="js/data.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/animations.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/components/cityDesign.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,44 @@
+/* Targeting the image section */
+.city-design-section {
+    background-color: #f5f5f5;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.city-design-section .header h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.city-design-section .city-design-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.city-design-section .city-map {
+    rotate:-90deg;
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.city-design-section .underline {
+    width: 50px;
+    height: 4px;
+    background-color: #007BFF;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+.city-design-container:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
