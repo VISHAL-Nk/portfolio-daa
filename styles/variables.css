@@ -1,0 +1,20 @@
+:root {
+  /* Dark theme colors */
+  --primary-color: #6d28d9;
+  --secondary-color: #4c1d95;
+  --text-color: #e2e8f0;
+  --background-color: #0f172a;
+  --card-background: #1e293b;
+  --accent-color: #8b5cf6;
+  --success-color: #10b981;
+  --header-bg: rgba(15, 23, 42, 0.95);
+  
+  /* Measurements */
+  --animation-timing: 0.3s;
+  --header-height: 70px;
+  --container-max-width: 1200px;
+  
+  /* Shadows */
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.4);
+}

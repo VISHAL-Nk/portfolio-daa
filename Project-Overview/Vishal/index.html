@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script src="js/navigation.js" defer></script>
+    <script src="js/animations.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <i class="icon-graduation"></i>
+                <span>Student Portfolio</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-section="portfolio">Portfolio</button>
+                <button class="nav-btn" data-section="reflection">Reflection</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section id="portfolio" class="section active fade-in">
+            <div class="hero-card">
+                <div class="hero-content">
+                    <h1>Vishal R Naik</h1>
+                    <p>Passionate computer science student with a keen interest in technology and design.</p>
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-github"></a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="icon-linkedin"></a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="" alt="Profile">
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <i class="icon-user"></i>
+                        <h2>Basic Details</h2>
+                    </div>
+                    <ul>
+                        <li><strong>USN:</strong> 01FE23BCS294</li>
+                        <li><strong>Roll No:</strong> 248</li>
+                        <li><strong>Email:</strong> 01fe23bcs294@kletech.ac.in</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="card-header">
+                        <i class="icon-book"></i>
+                        <h2>Education</h2>
+                    </div>
+                    <div class="education-info">
+                        <p class="degree">Bachelor of Engineering</p>
+                        <p>Computer Science</p>
+                        <p>KLE Technological University</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reflection" class="section fade-in">
+            <!-- Reflection content will be loaded dynamically -->
+        </section>
+    </main>
+
+    <script src="js/reflectionData.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

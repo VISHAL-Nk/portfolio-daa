@@ -1,0 +1,21 @@
+/* Font styles */
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1rem;
+}
+
+.landing-content h1 {
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .landing-content h1 {
+    font-size: 2.5rem;
+  }
+}
