@@ -3,75 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portfolio</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/components.css">
-    <script src="js/navigation.js" defer></script>
-    <script src="js/animations.js" defer></script>
+    <title>Vishal R Naik - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-icons@0.344.0/dist/umd/lucide-icons.min.js">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-content">
-            <div class="nav-logo">
-                <i class="icon-graduation"></i>
-                <span>Student Portfolio</span>
-            </div>
-            <div class="nav-links">
-                <button class="nav-btn active" data-section="portfolio">Portfolio</button>
-                <button class="nav-btn" data-section="reflection">Reflection</button>
-            </div>
+            <a href="../../index.html" class="nav-link">
+                <i data-lucide="home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-link" onclick="history.back()">
+                <i data-lucide="arrow-left"></i>
+                <span>Back</span>
+            </a>
         </div>
     </nav>
 
-    <main class="main-content">
-        <section id="portfolio" class="section active fade-in">
-            <div class="hero-card">
-                <div class="hero-content">
-                    <h1>Vishal R Naik</h1>
-                    <p>Passionate computer science student with a keen interest in technology and design.</p>
-                    <div class="social-links">
-                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-github"></a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="icon-linkedin"></a>
-                    </div>
+    <main>
+        <section id="profile" class="section">
+            <div class="profile-header">
+                <div class="profile-image">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPrlAeNxlUgL_sQbPhUscyYC1ykTP00kPzxaW_Bc9hjLH4qgIUEug3dCeofhw_pVq1ZKudTklJ30hIK7JUD4JZWwpuAQlcY_FKgJSAhRn1s779mWe6PFDpn01bGFChUPStTEp9apwQX98VO7pL4yJVB2g=w869-h869-s-no-gm?authuser=0?fit=crop&w=300&h=300" alt="Profile Picture">
                 </div>
-                <div class="hero-image">
-                    <img src="" alt="Profile">
-                </div>
+                <h1>Vishal R Naik</h1>
+                <p>Computer Science Engineering Student</p>
             </div>
 
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="card-header">
-                        <i class="icon-user"></i>
-                        <h2>Basic Details</h2>
-                    </div>
+            <div class="profile-details">
+                <div class="detail-card">
+                    <h2><i data-lucide="user"></i> Basic Details</h2>
                     <ul>
                         <li><strong>USN:</strong> 01FE23BCS294</li>
                         <li><strong>Roll No:</strong> 248</li>
                         <li><strong>Email:</strong> 01fe23bcs294@kletech.ac.in</li>
                     </ul>
                 </div>
-                <div class="info-card">
-                    <div class="card-header">
-                        <i class="icon-book"></i>
-                        <h2>Education</h2>
-                    </div>
+
+                <div class="detail-card">
+                    <h2><i data-lucide="book-open"></i> Education</h2>
                     <div class="education-info">
-                        <p class="degree">Bachelor of Engineering</p>
+                        <h3>Bachelor of Engineering</h3>
                         <p>Computer Science</p>
                         <p>KLE Technological University</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="reflection" class="section fade-in">
-            <!-- Reflection content will be loaded dynamically -->
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i data-lucide="github"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i data-lucide="linkedin"></i>
+                </a>
+            </div>
+
+            <a href="reflection.html" class="reflection-button">
+                <i data-lucide="book-open"></i>
+                <span>View Learning Reflection</span>
+            </a>
         </section>
     </main>
 
-    <script src="js/reflectionData.js"></script>
-    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="script.js"></script>
 </body>
 </html>
