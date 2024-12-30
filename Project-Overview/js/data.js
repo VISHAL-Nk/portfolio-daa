@@ -32,8 +32,16 @@ export const features = [
 
 // Budget data
 export const budgetData = [
-    ['Infrastructure Development', 150],
-    ['Technology Implementation', 75],
-    ['Environmental Initiatives', 50],
-    ['Public Services', 85]
+    ['Industrial Area', 600],
+    ['Solar Power Plant', 500],
+    ['Sports Complex', 300],
+    ['Bus Stops', 30],
+    ['Government Office', 300],
+    ['Water Treatment Plant', 80],
+    ['IT Sector', 350],
+    ['Road Construction', 800],
+    ['Resorts', 10],
+    ['Ports', 217],
+    ['Tourism', 63],
+    ['Residential Area Expenditure', 400]
 ];
