@@ -1,437 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic Management</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Body Styling */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background: #121212;
-            color: #e0e0e0;
-            overflow-x: hidden;
-            transition: background 0.3s ease;
-        }
-
-        /* Navbar Styling */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #000;
-            padding: 15px 50px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            transition: box-shadow 0.3s ease;
-        }
-
-        nav a {
-            color: #e0e0e0;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1rem;
-            text-transform: uppercase;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #dcdcdc;
-            transform: scale(1.05);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
-            background: linear-gradient(to bottom, #1b1b1b, #121212);
-            padding: 20px;
-            opacity: 0;
-            animation: fadeIn 2.5s ease-in-out forwards;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #e0e0e0;
-            text-transform: uppercase;
-            animation: slideInFromLeft 1.5s ease-in-out;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: #e0e0e0;
-            animation: slideInFromRight 1.5s ease-in-out;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: #121212;
-            background: #f1f1f1;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background: #dcdcdc;
-            transform: scale(1.05);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Section Styling */
-        section {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: none;
-            animation: fadeInUp 2s ease-in-out;
-            margin-top: 80px;
-            /* Add this line to create space between navbar and objectives */
-        }
-
-
-        h2 {
-            font-size: 2rem;
-            color: #e0e0e0;
-            margin-bottom: 20px;
-        }
-
-        p,
-        ul {
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        ul li::before {
-            content: "✔";
-            color: #dcdcdc;
-            margin-right: 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #000;
-            color: #e0e0e0;
-            transition: background 0.3s ease;
-        }
-
-        footer:hover {
-            background: #1b1b1b;
-        }
-
-        /* Graph Section */
-        .graph-container {
-            margin-top: 20px;
-            animation: fadeInUp 2s ease-in-out;
-        }
-
-        .graph h3 {
-            text-align: center;
-            color: #e0e0e0;
-            font-size: 1.5rem;
-            margin-top: 20px;
-        }
-
-        /* Code Section */
-        .code-section {
-            display: none;
-            margin-top: 20px;
-            animation: fadeInUp 1.5s ease-in-out;
-        }
-
-        .code-container {
-            background: #1b1b1b;
-            padding: 20px;
-            border-radius: 10px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            font-family: monospace;
-            font-size: 0.9rem;
-            color: #dcdcdc;
-        }
-
-        .code-button {
-            margin-top: 20px;
-        }
-
-        /* Adjust spacing between sections */
-        section h2+p {
-            margin-bottom: 10px;
-        }
-
-        /* Keyframes for Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInFromLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInFromRight {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-    </style>
+    <title>Tourism Recommendation System</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/animations.css">
 </head>
-
 <body>
+    <!-- Problem Statement Section -->
     <nav>
         <div>
-            <a href="#" class="nav-link" onclick="history.back()">BACK</a>
-            <a href="../../index.html">Home</a>
-            <a href="../../Project-Overview/Vishal/index.html">About Me</a>
-            <a href="../../Project-Overview/index.html">Team Details</a>
+            
+            <a href="">Home</a>
+            <a href="">Home</a>
+            <a href="">About Me</a>
+            <a href="">Team Details</a>
         </div>
     </nav>
-
-    <div class="hero">
-        <h1>Traffic Management</h1>
-        <p>Optimize traffic signal timings at a four-way intersection to balance arrival and departure rates, minimizing
-            congestion. Ensure green times respect minimum and maximum constraints for smooth traffic flow.</p>
-        <button class="button" onclick="showContent()">Learn More</button>
-    </div>
-
-    <section id="content">
-        <h2>Objectives for optimize green signal timings</h2>
-        <ul>
-            <li>Minimize queue lengths at each approach to reduce traffic congestion.</li>
-            <li>Respect operational constraints, such as:
-                Minimum green time to ensure safety and traffic flow and
-                Maximum green time to prevent excessive delays for other approaches.</li>
-            <li>Achieve stability in signal timings through iterative adjustments.</li>
-        </ul>
-
-        <h2>Implementation</h2>
-        <p>Our implementation utilizes advanced data structures such as Arrays, Linked Lists, Hash Tables, Priority
-            Queues and Vectors to optimize green signal timings defficiently. These tools ensure real-time data access
-            and efficient processing tailored to the Traffic Management.</p>
-
-        <!-- Graph Section -->
-        <div class="graph-container">
-            <h3>Average Traffic Analysis Graph</h3>
-            <canvas id="rainfallGraph"></canvas>
+    <section class="hero">
+        <div class="container"> 
+            <div class="icon-wrapper">
+                <svg class="compass-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+            </div>
+            <h1>Tourism Recommendation System</h1>
+            <div class="card problem-statement">
+                <h2>Problem Statement</h2>
+                <p>With the increasing number of travel enthusiasts worldwide, it has become essential to provide 
+                   personalized and relevant travel recommendations. Traditional recommendation systems often fail 
+                   to quickly and efficiently match user preferences with location-based suggestions.</p>
+                <div class="sdg-grid">
+                    <div class="sdg-card">
+                        <h3>SDG 9</h3>
+                        <p>Industry, Innovation, and Infrastructure: Supporting efficient travel infrastructure through 
+                           smart recommendations.</p>
+                    </div>
+                    <div class="sdg-card">
+                        <h3>SDG 11</h3>
+                        <p>Sustainable Cities and Communities: Promoting sustainable tourism and community-focused 
+                           travel planning.</p>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Implemented Code Section -->
-        <button class="button code-button" onclick="showCode()">Show Implemented Code</button>
-        <div class="code-section" id="implementedCode">
-            <h3>Implemented Code</h3>
-            <div class="code-container">
-                <pre>
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Main Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <h3>Prefix-Based Search</h3>
+                    <p>Quick and intuitive search with real-time suggestions as you type.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <h3>Fast Retrieval</h3>
+                    <p>Efficient Trie data structure ensures lightning-fast recommendation retrieval.</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                        <line x1="9" y1="3" x2="9" y2="18"></line>
+                        <line x1="15" y1="6" x2="15" y2="21"></line>
+                    </svg>
+                    <h3>Location Matching</h3>
+                    <p>Smart matching of user preferences with location-based suggestions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Code Section -->
+    <section class="code-section">
+        <div class="container">
+            <h2>Implementation</h2>
+            <div class="code-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="cpp">C++ Implementation</button>
+                </div>
+                <div class="code-content">
+                    <pre class="code-block active" id="cpp-code">
+// C++ Implementation
+#include <bits/stdc++.h>
 using namespace std;
 
-struct Approach {
-    double arrival_rate;
-    double departure_rate;
-    int green_time;
-    int queue_length;
+// Define a TrieNode
+class TrieNode {
+public:
+    TrieNode* children[26]; // Each child represents a letter ('a' to 'z')
+    bool isEndOfWord;
+    vector<string> recommendations; // Store location-based suggestions
+
+    TrieNode() {
+        for (int i = 0; i < 26; i++) {
+            children[i] = nullptr;
+        }
+        isEndOfWord = false;
+    }
 };
 
-void initialize_green_times(vector<Approach>& approaches, int cycle_time, int min_green, int max_green) {
-    double total_demand = 0.0;
-    for (const auto& approach : approaches) {
-        total_demand += approach.arrival_rate;
-    }
-    for (auto& approach : approaches) {
-        approach.green_time = static_cast<int>((approach.arrival_rate / total_demand) * cycle_time);
-        approach.green_time = max(approach.green_time, min_green);
-        approach.green_time = min(approach.green_time, max_green);
-    }
-}
+// Define a Trie for managing tourism recommendations
+class Trie {
+private:
+    TrieNode* root;
 
-void calculate_queue_lengths(vector<Approach>& approaches) {
-    for (auto& approach : approaches) {
-        approach.queue_length = max(0, static_cast<int>(approach.arrival_rate * approach.green_time - approach.departure_rate * approach.green_time));
-    }
-}
-
-void adjust_green_times(vector<Approach>& approaches, int min_green, int max_green) {
-    priority_queue<pair<int, int>> pq; // Max-heap to prioritize approaches with the largest queues
-
-    for (int i = 0; i < approaches.size(); ++i) {
-        pq.push({approaches[i].queue_length, i});
+public:
+    Trie() {
+        root = new TrieNode();
     }
 
-    while (!pq.empty()) {
-        auto [queue_length, idx] = pq.top();
-        pq.pop();
+    // Insert a keyword with related recommendations
+    void insert(string keyword, vector<string> recommendations) {
+        TrieNode* node = root;
+        for (char ch : keyword) {
+            int index = ch - 'a';
+            if (node->children[index] == nullptr) {
+                node->children[index] = new TrieNode();
+            }
+            node = node->children[index];
+        }
+        node->isEndOfWord = true;
+        node->recommendations = recommendations;
+    }
 
-        if (queue_length > 0 && approaches[idx].green_time < max_green) {
-            approaches[idx].green_time++;
-        } else if (queue_length < 0 && approaches[idx].green_time > min_green) {
-            approaches[idx].green_time--;
+    // Search for a keyword and return related recommendations
+    vector<string> search(string keyword) {
+        TrieNode* node = root;
+        for (char ch : keyword) {
+            int index = ch - 'a';
+            if (node->children[index] == nullptr) {
+                return {}; // Return empty vector if keyword not found
+            }
+            node = node->children[index];
+        }
+        return node->isEndOfWord ? node->recommendations : vector<string>{};
+    }
+
+    // Check if any keyword starts with a given prefix
+    vector<string> startsWith(string prefix) {
+        TrieNode* node = root;
+        for (char ch : prefix) {
+            int index = ch - 'a';
+            if (node->children[index] == nullptr) {
+                return {}; // Return empty vector if prefix not found
+            }
+            node = node->children[index];
         }
 
-        approaches[idx].green_time = max(approaches[idx].green_time, min_green);
-        approaches[idx].green_time = min(approaches[idx].green_time, max_green);
+        // Collect all recommendations from this node and its children
+        vector<string> result;
+        collectAllRecommendations(node, result);
+        return result;
     }
-}
 
-bool check_convergence(const vector<Approach>& approaches, const vector<int>& prev_green_times) {
-    for (int i = 0; i < approaches.size(); ++i) {
-        if (approaches[i].green_time != prev_green_times[i]) {
-            return false;
-        }
-    }
-    return true;
-}
+    // Helper function to collect all recommendations recursively
+    void collectAllRecommendations(TrieNode* node, vector<string>& result) {
+        if (node == nullptr) return;
 
-void optimize_traffic_signals(vector<Approach>& approaches, int cycle_time, int min_green, int max_green) {
-    initialize_green_times(approaches, cycle_time, min_green, max_green);
-
-    bool converged = false;
-    while (!converged) {
-        vector<int> prev_green_times;
-        for (const auto& approach : approaches) {
-            prev_green_times.push_back(approach.green_time);
+        if (node->isEndOfWord) {
+            result.insert(result.end(), node->recommendations.begin(), node->recommendations.end());
         }
 
-        calculate_queue_lengths(approaches);
-        adjust_green_times(approaches, min_green, max_green);
-
-        converged = check_convergence(approaches, prev_green_times);
+        for (int i = 0; i < 26; i++) {
+            collectAllRecommendations(node->children[i], result);
+        }
     }
-}
+};
 
+// Main function
 int main() {
-    vector<Approach> approaches = {
-        {0.2, 0.25, 0, 0},
-        {0.15, 0.2, 0, 0},
-        {0.1, 0.15, 0, 0},
-        {0.05, 0.1, 0, 0}
-    };
+    Trie trie;
 
-    int cycle_time = 60;
-    int min_green = 10;
-    int max_green = 30;
+    // Insert tourism-related keywords and recommendations
+    trie.insert("beach", {"Bondi Beach", "Waikiki Beach", "Copacabana Beach"});
+    trie.insert("museum", {"Louvre Museum", "Metropolitan Museum of Art", "British Museum"});
+    trie.insert("mountain", {"Mount Everest", "Rocky Mountains", "Kilimanjaro"});
+    trie.insert("park", {"Yellowstone National Park", "Central Park", "Yosemite National Park"});
 
-    optimize_traffic_signals(approaches, cycle_time, min_green, max_green);
+    // Search and print recommendations
+    string keyword = "museum";
+    vector<string> recommendations = trie.search(keyword);
 
-    cout << "Optimized green times:" << endl;
-    for (int i = 0; i < approaches.size(); ++i) {
-        cout << "Approach " << i + 1 << ": " << approaches[i].green_time << " seconds" << endl;
+    cout << "Recommendations for '" << keyword << "':" << endl;
+    for (const string& rec : recommendations) {
+        cout << "- " << rec << endl;
+    }
+
+    // Prefix search for "mou" (mountain-related)
+    string prefix = "mou";
+    vector<string> prefixResults = trie.startsWith(prefix);
+
+    cout << "\nRecommendations starting with '" << prefix << "':" << endl;
+    for (const string& rec : prefixResults) {
+        cout << "- " << rec << endl;
     }
 
     return 0;
-}
 
-        </pre>
+};</pre>
+                    
+                </div>
             </div>
         </div>
-
     </section>
 
-    <footer>
-        <p>&copy; 2024 Traffic Management | All Rights Reserved</p>
-    </footer>
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <div class="container">
+            <h2>Try It Out</h2>
+            <div class="demo-card">
+                <input type="text" id="searchInput" placeholder="Start typing (e.g., 'beach', 'museum', 'mountain')" />
+                <div id="results" class="results-container"></div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        function showContent() {
-            document.querySelector('.hero').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-        }
-
-        function showCode() {
-            document.getElementById('implementedCode').style.display = 'block';
-        }
-
-        // Jaipur's Rainfall Data for the graph
-        const rainfallData = [4, 7, 15, 25, 30, 34, 37, 32, 23, 15];
-        const months = ['2 AM - 4 AM', '4 AM - 6 AM', '6 AM - 8 AM', '8 AM - 10 AM', '10 AM - 12 PM', '12 PM - 2 PM ', '2 PM - 4 PM', '4 PM - 6 PM ', '6 PM - 8 PM', '8 PM - 10 PM'];
-
-        // Create a bar chart using Chart.js
-        const ctx = document.getElementById('rainfallGraph').getContext('2d');
-        const rainfallChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: 'Hourly traffic data',
-                    data: rainfallData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    <script src="/js/trie.js"></script>
+    <script src="/js/demo.js"></script>
+    <script src="/js/ui.js"></script>
 </body>
-
 </html>
