@@ -1,24 +1,24 @@
 // Team member data
 export const teamMembers = [
     {
-        name: 'Vishal R Naik',
+        name: 'Vishal ',
         rollNo: '248',
         usn: '01FE23BCS294'
     },
     {
-        name: 'Team Member 2',
-        rollNo: 'TBD',
-        usn: 'TBD'
+        name: 'Madhura',
+        rollNo: '221',
+        usn: '01FE23BCS103'
     },
     {
-        name: 'Team Member 3',
-        rollNo: 'TBD',
-        usn: 'TBD'
+        name: 'Devika',
+        rollNo: '217',
+        usn: '01FE23BCS089'
     },
     {
-        name: 'Team Member 4',
-        rollNo: 'TBD',
-        usn: 'TBD'
+        name: 'Vaishnavi',
+        rollNo: '227',
+        usn: '01FE23BCS125'
     }
 ];
 
