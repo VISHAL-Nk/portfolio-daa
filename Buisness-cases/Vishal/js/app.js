@@ -1,4 +1,34 @@
-#include <bits/stdc++.h>
+// Sample destinations data
+const sampleDestinations = [
+    {
+        name: "Bondi Beach",
+        type: "beach",
+        description: "Famous Australian beach known for surfing and coastal walks",
+        rating: 4.7,
+        activities: ["Surfing", "Swimming", "Sunbathing", "Coastal Walking"],
+        priceRange: "$$"
+    },
+    {
+        name: "Louvre Museum",
+        type: "museum",
+        description: "World's largest art museum and home to the Mona Lisa",
+        rating: 4.8,
+        activities: ["Art Viewing", "Guided Tours", "Photography"],
+        priceRange: "$$$"
+    }
+];
+
+// Initialize the tourism system
+const system = new TourismRecommendationSystem();
+sampleDestinations.forEach(dest => system.insertDestination(dest));
+
+// DOM elements
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const implementationCode = document.getElementById('implementation-code');
+
+// Display the implementation code
+implementationCode.textContent = `#include <bits/stdc++.h>
 using namespace std;
 
 // Geographic coordinates for location tracking and distance calculations
@@ -220,7 +250,7 @@ public:
         const Destination& dest = allDestinations[name];
         
         printSeparator('=');
-        cout << "\033[1m" << dest.name << " (" << dest.type << ")\033[0m" << endl;
+        cout << "033[1m" << dest.name << " (" << dest.type << ")033[0m" << endl;
         printSeparator();
         
         // Basic Information
@@ -233,21 +263,21 @@ public:
         
         // Distance and Location
         double distance = userLocation.distanceTo(dest.coords);
-        cout << "\nLocation Details:" << endl;
+        cout << "Location Details:" << endl;
         cout << "Distance from your location: " 
              << fixed << setprecision(1) << distance << " km" << endl;
         cout << "Coordinates: " << dest.coords.latitude << ", " 
              << dest.coords.longitude << endl;
         
         // Accessibility Information
-        cout << "\nAccessibility:" << endl;
+        cout << "Accessibility:" << endl;
         cout << "Wheelchair Accessible: " 
              << (dest.wheelchairAccessible ? "Yes" : "No") << endl;
         cout << "Difficulty Level: " << dest.difficulty << endl;
         
         // Operating Hours
         if (!dest.openingHours.empty()) {
-            cout << "\nOpening Hours:" << endl;
+            cout << "Opening Hours:" << endl;
             for (const auto& hours : dest.openingHours) {
                 cout << "  " << hours.first << ": " << hours.second << endl;
             }
@@ -255,7 +285,7 @@ public:
         
         // Activities and Features
         if (!dest.activities.empty()) {
-            cout << "\nAvailable Activities:" << endl;
+            cout << "Available Activities:" << endl;
             for (const auto& activity : dest.activities) {
                 cout << "  • " << activity << endl;
             }
@@ -263,7 +293,7 @@ public:
         
         // Nearby Attractions with Route
         if (!dest.nearbyDestinations.empty()) {
-            cout << "\nNearby Attractions:" << endl;
+            cout << "Nearby Attractions:" << endl;
             vector<Destination> nearbyDests;
             nearbyDests.push_back(dest);
             for (const auto& nearby : dest.nearbyDestinations) {
@@ -281,7 +311,7 @@ public:
         
         // Safety Information
         if (!dest.safetyTips.empty()) {
-            cout << "\nSafety Tips:" << endl;
+            cout << "Safety Tips:" << endl;
             for (const auto& tip : dest.safetyTips) {
                 cout << "  • " << tip << endl;
             }
@@ -339,7 +369,7 @@ int main() {
     
     // Perform searches with predefined queries
     for (const auto& query : searchQueries) {
-        cout << "\nSearching for: " << query << endl;
+        cout << "Searching for: " << query << endl;
         auto results = system.searchWithPrefix(query);
         
         if (results.empty()) {
@@ -347,7 +377,7 @@ int main() {
             continue;
         }
         
-        cout << "\nFound " << results.size() << " matching destinations:\n";
+        cout << "Found " << results.size() << " matching destinations:";
         system.printSeparator();
         
         for (int i = 0; i < results.size(); i++) {
@@ -363,4 +393,54 @@ int main() {
     }
     
     return 0;
+}`;
+
+// Create a result card
+function createResultCard(dest) {
+    return `
+        <div class="result-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start">
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem">
+                        ${dest.name}
+                    </h3>
+                    <p style="opacity: 0.7">${dest.type}</p>
+                </div>
+                <div style="display: flex; align-items: center">
+                    <span style="color: #fbbf24">★</span>
+                    <span style="margin-left: 0.25rem; opacity: 0.7">
+                        ${dest.rating}
+                    </span>
+                </div>
+            </div>
+            <p style="margin: 1rem 0">${dest.description}</p>
+            ${dest.activities ? `
+                <div style="margin-top: 1rem">
+                    <h4 style="font-weight: 500; margin-bottom: 0.5rem">Activities:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
+                        ${dest.activities.map(activity => `
+                            <span style="background: rgba(255, 255, 255, 0.1); 
+                                       padding: 0.25rem 0.75rem; border-radius: 9999px; 
+                                       font-size: 0.875rem">
+                                ${activity}
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+        </div>
+    `;
 }
+
+// Handle search input
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    
+    if (query === '') {
+        searchResults.innerHTML = '';
+        return;
+    }
+
+    const results = system.searchWithPrefix(query);
+    searchResults.innerHTML = results.map(createResultCard).join('');
+});

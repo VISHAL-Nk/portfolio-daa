@@ -4,45 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourism Recommendation System</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/components.css">
-    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Problem Statement Section -->
-    <nav>
-        <div>
-            <a href="#" class="nav-link" onclick="history.back()">
-                <span>Back</span>
-            <a href="../../index.html">Home</a>
-            <a href="../../Project-Overview/Vishal/index.html">About Me</a>
-            <a href="../../Project-Overview/">Team Details</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link back-link">
+                    <i data-lucide="arrow-left"></i>
+                    Back
+                </a>
+                <a href="../../index.html" class="nav-link active">
+                    <i data-lucide="home"></i>
+                    Home
+                </a>
+                <a href="../../Project-Overview/Vishal/index.html" class="nav-link">
+                    <i data-lucide="user"></i>
+                    About Me
+                </a>
+                <a href="../../Project-Overview/index.html" class="nav-link">
+                    <i data-lucide="users"></i>
+                    Team Details
+                </a>
+            </div>
         </div>
     </nav>
+
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="container"> 
+        <div class="container">
             <div class="icon-wrapper">
-                <svg class="compass-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="compass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                 </svg>
             </div>
             <h1>Tourism Recommendation System</h1>
-            <div class="card problem-statement">
+            <div class="problem-statement">
                 <h2>Problem Statement</h2>
-                <p>With the increasing number of travel enthusiasts worldwide, it has become essential to provide 
-                   personalized and relevant travel recommendations. Traditional recommendation systems often fail 
+                <p>With the increasing number of travel enthusiasts worldwide, it has become essential to provide
+                   personalized and relevant travel recommendations. Traditional recommendation systems often fail
                    to quickly and efficiently match user preferences with location-based suggestions.</p>
                 <div class="sdg-grid">
                     <div class="sdg-card">
                         <h3>SDG 9</h3>
-                        <p>Industry, Innovation, and Infrastructure: Supporting efficient travel infrastructure through 
-                           smart recommendations.</p>
+                        <p>Industry, Innovation, and Infrastructure: Supporting efficient travel infrastructure through smart recommendations.</p>
                     </div>
                     <div class="sdg-card">
                         <h3>SDG 11</h3>
-                        <p>Sustainable Cities and Communities: Promoting sustainable tourism and community-focused 
-                           travel planning.</p>
+                        <p>Sustainable Cities and Communities: Promoting sustainable tourism and community-focused travel planning.</p>
                     </div>
                 </div>
             </div>
@@ -55,7 +66,7 @@
             <h2>Main Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
@@ -63,7 +74,7 @@
                     <p>Quick and intuitive search with real-time suggestions as you type.</p>
                 </div>
                 <div class="feature-card">
-                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"></circle>
                         <polyline points="12 6 12 12 16 14"></polyline>
                     </svg>
@@ -71,10 +82,9 @@
                     <p>Efficient Trie data structure ensures lightning-fast recommendation retrieval.</p>
                 </div>
                 <div class="feature-card">
-                    <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
-                        <line x1="9" y1="3" x2="9" y2="18"></line>
-                        <line x1="15" y1="6" x2="15" y2="21"></line>
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                     <h3>Location Matching</h3>
                     <p>Smart matching of user preferences with location-based suggestions.</p>
@@ -84,135 +94,14 @@
     </section>
 
     <!-- Code Section -->
-    <section class="code-section">
+    <section class="code-section" id="code-implementation">
         <div class="container">
             <h2>Implementation</h2>
-            <div class="code-tabs">
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="cpp">C++ Implementation</button>
+            <div class="code-container">
+                <div class="code-header">
+                    <button class="tab-button active">Implementation</button>
                 </div>
-                <div class="code-content">
-                    <pre class="code-block active" id="cpp-code">
-// C++ Implementation
-#include <bits/stdc++.h>
-using namespace std;
-
-// Define a TrieNode
-class TrieNode {
-public:
-    TrieNode* children[26]; // Each child represents a letter ('a' to 'z')
-    bool isEndOfWord;
-    vector<string> recommendations; // Store location-based suggestions
-
-    TrieNode() {
-        for (int i = 0; i < 26; i++) {
-            children[i] = nullptr;
-        }
-        isEndOfWord = false;
-    }
-};
-
-// Define a Trie for managing tourism recommendations
-class Trie {
-private:
-    TrieNode* root;
-
-public:
-    Trie() {
-        root = new TrieNode();
-    }
-
-    // Insert a keyword with related recommendations
-    void insert(string keyword, vector<string> recommendations) {
-        TrieNode* node = root;
-        for (char ch : keyword) {
-            int index = ch - 'a';
-            if (node->children[index] == nullptr) {
-                node->children[index] = new TrieNode();
-            }
-            node = node->children[index];
-        }
-        node->isEndOfWord = true;
-        node->recommendations = recommendations;
-    }
-
-    // Search for a keyword and return related recommendations
-    vector<string> search(string keyword) {
-        TrieNode* node = root;
-        for (char ch : keyword) {
-            int index = ch - 'a';
-            if (node->children[index] == nullptr) {
-                return {}; // Return empty vector if keyword not found
-            }
-            node = node->children[index];
-        }
-        return node->isEndOfWord ? node->recommendations : vector<string>{};
-    }
-
-    // Check if any keyword starts with a given prefix
-    vector<string> startsWith(string prefix) {
-        TrieNode* node = root;
-        for (char ch : prefix) {
-            int index = ch - 'a';
-            if (node->children[index] == nullptr) {
-                return {}; // Return empty vector if prefix not found
-            }
-            node = node->children[index];
-        }
-
-        // Collect all recommendations from this node and its children
-        vector<string> result;
-        collectAllRecommendations(node, result);
-        return result;
-    }
-
-    // Helper function to collect all recommendations recursively
-    void collectAllRecommendations(TrieNode* node, vector<string>& result) {
-        if (node == nullptr) return;
-
-        if (node->isEndOfWord) {
-            result.insert(result.end(), node->recommendations.begin(), node->recommendations.end());
-        }
-
-        for (int i = 0; i < 26; i++) {
-            collectAllRecommendations(node->children[i], result);
-        }
-    }
-};
-
-// Main function
-int main() {
-    Trie trie;
-
-    // Insert tourism-related keywords and recommendations
-    trie.insert("beach", {"Bondi Beach", "Waikiki Beach", "Copacabana Beach"});
-    trie.insert("museum", {"Louvre Museum", "Metropolitan Museum of Art", "British Museum"});
-    trie.insert("mountain", {"Mount Everest", "Rocky Mountains", "Kilimanjaro"});
-    trie.insert("park", {"Yellowstone National Park", "Central Park", "Yosemite National Park"});
-
-    // Search and print recommendations
-    string keyword = "museum";
-    vector<string> recommendations = trie.search(keyword);
-
-    cout << "Recommendations for '" << keyword << "':" << endl;
-    for (const string& rec : recommendations) {
-        cout << "- " << rec << endl;
-    }
-
-    // Prefix search for "mou" (mountain-related)
-    string prefix = "mou";
-    vector<string> prefixResults = trie.startsWith(prefix);
-
-    cout << "\nRecommendations starting with '" << prefix << "':" << endl;
-    for (const string& rec : prefixResults) {
-        cout << "- " << rec << endl;
-    }
-
-    return 0;
-
-};</pre>
-                    
-                </div>
+                <pre class="code-content"><code id="implementation-code"></code></pre>
             </div>
         </div>
     </section>
@@ -220,26 +109,23 @@ int main() {
     <!-- Demo Section -->
     <section class="demo-section">
         <div class="container">
-            <h2>Try It Out</h2>
-            <div class="demo-card">
-                <input type="text" id="searchInput" placeholder="Start typing (e.g., 'beach', 'museum', 'mountain')" />
-                <div id="results" class="results-container"></div>
+            <div class="section-header">
+                <h2 class="gradient-text">Try It Yourself</h2>
+                <a href="../../codes/Vishal.cpp" class="view-code-btn">View Code</a>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Start typing (e.g., 'beach', 'museum')">
+                <div id="searchResults" class="search-results"></div>
             </div>
         </div>
     </section>
-    <section class="demo-section">
-        <div class="container">
-            <h2>Code</h2>
-            <div class="democard">
-                <a href="../../codes/Vishal.cpp" class="nav-lik" ">
-                    <span>View Code</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <script src="js/trie.js"></script>
-    <script src="js/demo.js"></script>
-    <script src="js/ui.js"></script>
+    
+    <script src="js/tourismSystem.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
