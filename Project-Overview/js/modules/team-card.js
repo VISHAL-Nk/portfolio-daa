@@ -13,7 +13,7 @@ export function createTeamCard(member, index) {
             card.href = 'TeamMember3/index.html';
             break;
         case 3:
-            card.href = 'TeamMember4/index.html';
+            card.href = 'https://sites.google.com/kletech.ac.in/daa-portfolio-227/home';
             break;
         default:
             card.href = '#';
