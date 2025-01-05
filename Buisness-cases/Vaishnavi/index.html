@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TransitOptimize</title>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Base Styles */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #9333ea, #3b82f6, #06b6d4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      background: var(--primary-gradient);
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover {
+      opacity: 0.8;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* Cards Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+      border-radius: 1rem;
+      transition: transform 0.3s;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-content {
+      text-align: center;
+    }
+
+    .card-icon {
+      margin-bottom: 1rem;
+    }
+
+    .card-details {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover .card-details {
+      opacity: 1;
+    }
+
+    /* Solution Steps */
+    .solution-step {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-number {
+      background: rgba(255, 255, 255, 0.2);
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    /* SDG Cards */
+    .sdg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .sdg-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      padding: 2rem;
+      border-radius: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sdg-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 2rem; }
+      .card-grid { grid-template-columns: 1fr; }
+      .sdg-grid { grid-template-columns: 1fr; }
+
+      .code-section {
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-top: 2rem;
+        overflow-x: auto;
+      }
+    
+      .code-section pre {
+        font-family: 'Consolas', 'Monaco', monospace;
+        color: #e0e0e0;
+        line-height: 1.5;
+        tab-size: 2;
+      }
+    
+      .code-section code {
+        display: block;
+        padding: 1rem;
+      }
+    
+      /* Code colors for syntax highlighting */
+      .keyword { color: #ff79c6; }
+      .type { color: #8be9fd; }
+      .string { color: #f1fa8c; }
+      .comment { color: #6272a4; }
+      .function { color: #50fa7b; }
+      .number { color: #bd93f9; }
+    
+      /* Button Styles */
+      .code-button {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        margin: 1rem 0;
+      }
+    
+      .code-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    
+      .code-button i {
+        margin-right: 0.5rem;
+      }
+    
+      /* Copy button */
+      .copy-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background 0.3s ease;
+      }
+    
+      .copy-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    
+      .code-container {
+        position: relative;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-brand">
+        <i data-lucide="bus"></i>
+        TransitOptimize
+      </div>
+      <div class="nav-links">
+        <a href="../index.html"><i data-lucide="back"></i>Back</a>
+        <a href="../../index.html"><i data-lucide="home"></i>Home</a>
+        <a href="../../Project-Overview/index.html"><i data-lucide="info"></i>Team Detail</a>
+        <a href="../../Project-Overview/Vaishnavi/index.html"><i data-lucide="git-branch"></i>About Me</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home">
+      <div class="content text-center">
+        <h1>Public Transportation Optimization</h1>
+        <p class="mb-8">Enhancing urban mobility through intelligent scheduling and routing</p>
+        <a href="#about" class="card" style="display: inline-block; padding: 1rem 2rem; text-decoration: none; color: white;">
+          Learn More
+        </a>
+      </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section id="about">
+      <div class="content">
+        <h2>Our Objectives</h2>
+        <div class="card-grid">
+          <!-- Waiting Times Card -->
+          <div class="card">
+            <div class="card-content">
+              <div class="card-icon"><i data-lucide="clock"></i></div>
+              <h3 class="mb-4">Reduce Waiting Times</h3>
+              <p>Optimize schedules to minimize passenger waiting periods</p>
+            </div>
+            <div class="card-details">
+              <ul>
+                <li>Real-time demand tracking</li>
+                <li>Dynamic bus allocation</li>
+                <li>Peak hour optimization</li>
+                <li>Predictive scheduling</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Coverage Card -->
+          <div class="card">
+            <div class="card-content">
+              <div class="card-icon"><i data-lucide="map"></i></div>
+              <h3 class="mb-4">Improve Coverage</h3>
+              <p>Extend and optimize routes to serve suburban areas</p>
+            </div>
+            <div class="card-details">
+              <ul>
+                <li>Route optimization algorithms</li>
+                <li>Coverage analysis</li>
+                <li>Demand-based routing</li>
+                <li>Suburban connectivity</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Resources Card -->
+          <div class="card">
+            <div class="card-content">
+              <div class="card-icon"><i data-lucide="gauge"></i></div>
+              <h3 class="mb-4">Maximize Resources</h3>
+              <p>Ensure efficient allocation of transportation resources</p>
+            </div>
+            <div class="card-details">
+              <ul>
+                <li>Resource utilization tracking</li>
+                <li>Cost optimization</li>
+                <li>Fleet management</li>
+                <li>Maintenance scheduling</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution">
+      <div class="content">
+        <h2>Technical Implementation</h2>
+        <!-- Priority Queue -->
+        <div class="solution-step">
+          <div class="step-header">
+            <div class="step-number">1</div>
+            <h3>Priority Queue Implementation</h3>
+          </div>
+          <p class="mb-4">Our max-heap based priority queue system optimizes bus allocation:</p>
+          <ul>
+            <li>Dynamic priority assignment based on waiting time and passenger count</li>
+            <li>O(log n) time complexity for efficient bus allocation</li>
+            <li>Real-time demand fluctuation handling</li>
+            <li>Automatic system adjustments</li>
+          </ul>
+        </div>
+
+        <!-- BST Operations -->
+        <div class="solution-step">
+          <div class="step-header">
+            <div class="step-number">2</div>
+            <h3>Binary Search Tree Operations</h3>
+          </div>
+          <p class="mb-4">BST implementation for request management:</p>
+          <ul>
+            <li>O(log n) search time for stop information</li>
+            <li>Efficient route consolidation during off-peak hours</li>
+            <li>Balanced tree maintenance</li>
+            <li>Optimized data structure for quick updates</li>
+          </ul>
+        </div>
+
+        <!-- BFS Route Optimization -->
+        <div class="solution-step">
+          <div class="step-header">
+            <div class="step-number">3</div>
+            <h3>BFS Route Optimization</h3>
+          </div>
+          <p class="mb-4">Graph-based route planning using BFS:</p>
+          <ul>
+            <li>Optimal path identification between stops</li>
+            <li>Complete coverage of suburban areas</li>
+            <li>Route redundancy minimization</li>
+            <li>Efficient graph traversal for route planning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SDGs Section -->
+    <section id="sdgs">
+      <div class="content">
+        <h2>Supporting Sustainable Development Goals</h2>
+        <div class="sdg-grid">
+          <!-- SDG Cards -->
+          <div class="sdg-card">
+            <div class="sdg-number">11</div>
+            <h3 class="mb-4">Sustainable Cities</h3>
+            <p>Improving urban mobility and reducing inequality in transit access</p>
+          </div>
+          <div class="sdg-card">
+            <div class="sdg-number">13</div>
+            <h3 class="mb-4">Climate Action</h3>
+            <p>Reducing carbon emissions through optimized operations</p>
+          </div>
+          <div class="sdg-card">
+            <div class="sdg-number">9</div>
+            <h3 class="mb-4">Innovation</h3>
+            <p>Enhancing infrastructure through data-driven optimization</p>
+          </div>
+          <div class="sdg-card">
+            <div class="sdg-number">3</div>
+            <h3 class="mb-4">Well-being</h3>
+            <p>Improving air quality and reducing transit stress</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="code-implementation">
+  <div class="content">
+    <h2>Code Implementation</h2>
+    <p class="text-center mb-8">
+      Implementation of the core algorithms using C++ for optimal performance
+    </p>
+    
+    <a href="../../codes/Vaishnavi.cpp" class="code-button">
+      <i data-lucide="code"></i>View Implementation
+    </a>
+
+    <div id="code-view" class="code-container">
+      <div class="code-section">
+        
+        <pre><code class="cpp">
+
+                #include <iostream>
+                #include <queue>
+                #include <vector>
+                #include <climits>
+                using namespace std;
+                
+                // Function to allocate buses during peak hours
+                void allocateBuses(priority_queue<pair<int, int>>& demandQueue, int busesAvailable) {
+                    while (!demandQueue.empty() && busesAvailable > 0) {
+                        auto [waitingTime, routeId] = demandQueue.top();
+                        demandQueue.pop();
+                        cout << "Allocating bus to route " << routeId << " with waiting time " << waitingTime << endl;
+                        busesAvailable--;
+                    }
+                }
+                
+                // BST implementation for managing low-demand stops
+                class BST {
+                public:
+                    struct Node {
+                        int stopId;
+                        Node* left;
+                        Node* right;
+                        Node(int id) : stopId(id), left(nullptr), right(nullptr) {}
+                    };
+                
+                    Node* root;
+                
+                    BST() : root(nullptr) {}
+                
+                    void insert(int stopId) {
+                        root = insertNode(root, stopId);
+                    }
+                
+                    void inOrderTraversal(Node* node) {
+                        if (node) {
+                            inOrderTraversal(node->left);
+                            cout << "Stop " << node->stopId << " has low demand.\n";
+                            inOrderTraversal(node->right);
+                        }
+                    }
+                
+                    void displayLowDemandStops() {
+                        cout << "Low-demand stops during off-peak hours:\n";
+                        inOrderTraversal(root);
+                    }
+                
+                private:
+                    Node* insertNode(Node* node, int stopId) {
+                        if (!node) return new Node(stopId);
+                        if (stopId < node->stopId)
+                            node->left = insertNode(node->left, stopId);
+                        else if (stopId > node->stopId)
+                            node->right = insertNode(node->right, stopId);
+                        return node;
+                    }
+                };
+                
+                // Graph representation for shortest path calculation
+                class Graph {
+                public:
+                    vector<vector<pair<int, int>>> adjList;
+                    int numStops;
+                
+                    Graph(int stops) {
+                        numStops = stops;
+                        adjList.resize(stops);
+                    }
+                
+                    void addRoute(int u, int v, int dist) {
+                        adjList[u].push_back({v, dist});
+                        adjList[v].push_back({u, dist});
+                    }
+                
+                    void bfs(int start) {
+                        vector<int> dist(numStops, INT_MAX);
+                        dist[start] = 0;
+                        queue<int> q;
+                        q.push(start);
+                
+                        while (!q.empty()) {
+                            int u = q.front();
+                            q.pop();
+                
+                            for (auto& neighbor : adjList[u]) {
+                                int v = neighbor.first;
+                                int weight = neighbor.second;
+                
+                                if (dist[u] + weight < dist[v]) {
+                                    dist[v] = dist[u] + weight;
+                                    q.push(v);
+                                }
+                            }
+                        }
+                
+                        for (int i = 0; i < numStops; i++) {
+                            cout << "Shortest path from stop " << start << " to stop " << i << ": " << dist[i] << endl;
+                        }
+                    }
+                };
+                
+                int main() {
+                    int choice;
+                    cout << "Select an option:\n";
+                    cout << "1. Allocate buses during peak hours\n";
+                    cout << "2. Display low-demand stops\n";
+                    cout << "3. Calculate shortest paths between stops\n";
+                    cin >> choice;
+                
+                    if (choice == 1) {
+                        // Peak hour bus allocation
+                        priority_queue<pair<int, int>> demandQueue;
+                        demandQueue.push({50, 1});
+                        demandQueue.push({30, 2});
+                        demandQueue.push({70, 3});
+                
+                        int busesAvailable = 2;
+                        cout << "Allocating buses during peak hours:\n";
+                        allocateBuses(demandQueue, busesAvailable);
+                    } else if (choice == 2) {
+                        // Low-demand stop management
+                        BST bst;
+                        bst.insert(101);
+                        bst.insert(103);
+                        bst.insert(105);
+                
+                        bst.displayLowDemandStops();
+                    } else if (choice == 3) {
+                        // Shortest path calculation
+                        Graph g(7);
+                        g.addRoute(0, 1, 10);
+                        g.addRoute(0, 2, 15);
+                        g.addRoute(1, 3, 5);
+                        g.addRoute(1, 4, 8);
+                        g.addRoute(2, 5, 10);
+                        g.addRoute(2, 6, 7);
+                
+                        cout << "Shortest paths from main hub (stop 0):\n";
+                        g.bfs(0);
+                    } else {
+                        cout << "Invalid choice.\n";
+                    }
+                
+                    return 0;
+                }
+                
+</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Smooth scroll functionality
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeIn 1s ease-out forwards';
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    // Observe all cards and sections
+    document.querySelectorAll('.card, .solution-step, .sdg-card').forEach(
+      element => observer.observe(element)
+    );
+    function copyCode() {
+        const codeElement = document.querySelector('.code-section code');
+        const textArea = document.createElement('textarea');
+        textArea.value = codeElement.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        const copyButton = document.querySelector('.copy-button');
+        const originalText = copyButton.innerHTML;
+        copyButton.innerHTML = '<i data-lucide="check"></i>Copied!';
+        setTimeout(() => {
+          copyButton.innerHTML = originalText;
+          lucide.createIcons(); // Recreate icons
+        }, 2000);
+      }
+    
+      // Initialize copy icon
+      lucide.createIcons();
+  </script>
+</body>
+</html>
