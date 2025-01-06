@@ -1,140 +1,141 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
 // Function to allocate buses during peak hours
-void allocateBuses(priority_queue<pair<int, int>>& demandQueue, int busesAvailable) {
-    while (!demandQueue.empty() && busesAvailable > 0) {
-        auto [waitingTime, routeId] = demandQueue.top();
-        demandQueue.pop();
-        cout << "Allocating bus to route " << routeId << " with waiting time " << waitingTime << endl;
-        busesAvailable--;
+void allocateBuses3(priority_queue<pair<int, int>>& demandQueue3, int busesAvailable3) {
+    while (!demandQueue3.empty() && busesAvailable3 > 0) {
+        pair<int, int> topElement3 = demandQueue3.top();
+        int waitingTime3 = topElement3.first;
+        int routeId3 = topElement3.second;
+        demandQueue3.pop();
+        cout << "Allocating bus to route " << routeId3 << " with waiting time " << waitingTime3 << endl;
+        busesAvailable3--;
     }
 }
 
 // BST implementation for managing low-demand stops
-class BST {
+class BST3 {
 public:
-    struct Node {
-        int stopId;
-        Node* left;
-        Node* right;
-        Node(int id) : stopId(id), left(nullptr), right(nullptr) {}
+    struct Node3 {
+        int stopId3;
+        Node3* left3;
+        Node3* right3;
+        Node3(int id3) : stopId3(id3), left3(nullptr), right3(nullptr) {}
     };
 
-    Node* root;
+    Node3* root3;
 
-    BST() : root(nullptr) {}
+    BST3() : root3(nullptr) {}
 
-    void insert(int stopId) {
-        root = insertNode(root, stopId);
+    void insert3(int stopId3) {
+        root3 = insertNode3(root3, stopId3);
     }
 
-    void inOrderTraversal(Node* node) {
-        if (node) {
-            inOrderTraversal(node->left);
-            cout << "Stop " << node->stopId << " has low demand.\n";
-            inOrderTraversal(node->right);
+    void inOrderTraversal3(Node3* node3) {
+        if (node3) {
+            inOrderTraversal3(node3->left3);
+            cout << "Stop " << node3->stopId3 << " has low demand.\n";
+            inOrderTraversal3(node3->right3);
         }
     }
 
-    void displayLowDemandStops() {
+    void displayLowDemandStops3() {
         cout << "Low-demand stops during off-peak hours:\n";
-        inOrderTraversal(root);
+        inOrderTraversal3(root3);
     }
 
 private:
-    Node* insertNode(Node* node, int stopId) {
-        if (!node) return new Node(stopId);
-        if (stopId < node->stopId)
-            node->left = insertNode(node->left, stopId);
-        else if (stopId > node->stopId)
-            node->right = insertNode(node->right, stopId);
-        return node;
+    Node3* insertNode3(Node3* node3, int stopId3) {
+        if (!node3) return new Node3(stopId3);
+        if (stopId3 < node3->stopId3)
+            node3->left3 = insertNode3(node3->left3, stopId3);
+        else if (stopId3 > node3->stopId3)
+            node3->right3 = insertNode3(node3->right3, stopId3);
+        return node3;
     }
 };
 
 // Graph representation for shortest path calculation
-class Graph {
+class Graph3 {
 public:
-    vector<vector<pair<int, int>>> adjList;
-    int numStops;
+    vector<vector<pair<int, int>>> adjList3;
+    int numStops3;
 
-    Graph(int stops) {
-        numStops = stops;
-        adjList.resize(stops);
+    Graph3(int stops3) {
+        numStops3 = stops3;
+        adjList3.resize(stops3);
     }
 
-    void addRoute(int u, int v, int dist) {
-        adjList[u].push_back({v, dist});
-        adjList[v].push_back({u, dist});
+    void addRoute3(int u3, int v3, int dist3) {
+        adjList3[u3].push_back({v3, dist3});
+        adjList3[v3].push_back({u3, dist3});
     }
 
-    void bfs(int start) {
-        vector<int> dist(numStops, INT_MAX);
-        dist[start] = 0;
-        queue<int> q;
-        q.push(start);
+    void bfs3(int start3) {
+        vector<int> dist3(numStops3, INT_MAX);
+        dist3[start3] = 0;
+        queue<int> q3;
+        q3.push(start3);
 
-        while (!q.empty()) {
-            int u = q.front();
-            q.pop();
+        while (!q3.empty()) {
+            int u3 = q3.front();
+            q3.pop();
 
-            for (auto& neighbor : adjList[u]) {
-                int v = neighbor.first;
-                int weight = neighbor.second;
+            for (auto& neighbor3 : adjList3[u3]) {
+                int v3 = neighbor3.first;
+                int weight3 = neighbor3.second;
 
-                if (dist[u] + weight < dist[v]) {
-                    dist[v] = dist[u] + weight;
-                    q.push(v);
+                if (dist3[u3] + weight3 < dist3[v3]) {
+                    dist3[v3] = dist3[u3] + weight3;
+                    q3.push(v3);
                 }
             }
         }
 
-        for (int i = 0; i < numStops; i++) {
-            cout << "Shortest path from stop " << start << " to stop " << i << ": " << dist[i] << endl;
+        for (int i3 = 0; i3 < numStops3; i3++) {
+            cout << "Shortest path from stop " << start3 << " to stop " << i3 << ": " << dist3[i3] << endl;
         }
     }
 };
 
 int main() {
-    int choice;
+    int choice3;
     cout << "Select an option:\n";
     cout << "1. Allocate buses during peak hours\n";
     cout << "2. Display low-demand stops\n";
     cout << "3. Calculate shortest paths between stops\n";
-    cin >> choice;
+    cin >> choice3;
 
-    if (choice == 1) {
+    if (choice3 == 1) {
         // Peak hour bus allocation
-        priority_queue<pair<int, int>> demandQueue;
-        demandQueue.push({50, 1});
-        demandQueue.push({30, 2});
-        demandQueue.push({70, 3});
+        priority_queue<pair<int, int>> demandQueue3;
+        demandQueue3.push({50, 1});
+        demandQueue3.push({30, 2});
+        demandQueue3.push({70, 3});
 
-        int busesAvailable = 2;
+        int busesAvailable3 = 2;
         cout << "Allocating buses during peak hours:\n";
-        allocateBuses(demandQueue, busesAvailable);
-    } else if (choice == 2) {
+        allocateBuses3(demandQueue3, busesAvailable3);
+    } else if (choice3 == 2) {
         // Low-demand stop management
-        BST bst;
-        bst.insert(101);
-        bst.insert(103);
-        bst.insert(105);
+        BST3 bst3;
+        bst3.insert3(101);
+        bst3.insert3(103);
+        bst3.insert3(105);
 
-        bst.displayLowDemandStops();
-    } else if (choice == 3) {
+        bst3.displayLowDemandStops3();
+    } else if (choice3 == 3) {
         // Shortest path calculation
-        Graph g(7);
-        g.addRoute(0, 1, 10);
-        g.addRoute(0, 2, 15);
-        g.addRoute(1, 3, 5);
-        g.addRoute(1, 4, 8);
-        g.addRoute(2, 5, 10);
-        g.addRoute(2, 6, 7);
+        Graph3 g3(7);
+        g3.addRoute3(0, 1, 10);
+        g3.addRoute3(0, 2, 15);
+        g3.addRoute3(1, 3, 5);
+        g3.addRoute3(1, 4, 8);
+        g3.addRoute3(2, 5, 10);
+        g3.addRoute3(2, 6, 7);
 
         cout << "Shortest paths from main hub (stop 0):\n";
-        g.bfs(0);
+        g3.bfs3(0);
     } else {
         cout << "Invalid choice.\n";
     }

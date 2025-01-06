@@ -2,16 +2,16 @@
 using namespace std;
 
 // Geographic coordinates for location tracking and distance calculations
-struct Coordinates {
+struct Coordinates4 {
     double latitude;
     double longitude;
     
     // Default constructor for initialization
-    Coordinates(double lat = 0.0, double lon = 0.0) 
+    Coordinates4(double lat = 0.0, double lon = 0.0) 
         : latitude(lat), longitude(lon) {}
     
     // Calculate distance between two points using Haversine formula
-    double distanceTo(const Coordinates& other) const {
+    double distanceTo4(const Coordinates4& other) const {
         const double R = 6371.0; // Earth's radius in kilometers
         double lat1 = latitude * M_PI / 180.0;
         double lat2 = other.latitude * M_PI / 180.0;
@@ -27,18 +27,18 @@ struct Coordinates {
 };
 
 // Weather information for better trip planning
-struct WeatherInfo {
+struct WeatherInfo4 {
     double temperature;     // Average temperature in Celsius
     int rainyDays;         // Average number of rainy days per month
     int humidity;          // Average humidity percentage
     string weatherType;    // General weather description
     
-    WeatherInfo(double temp = 25.0, int rain = 5, int hum = 70, string type = "Sunny")
+    WeatherInfo4(double temp = 25.0, int rain = 5, int hum = 70, string type = "Sunny")
         : temperature(temp), rainyDays(rain), humidity(hum), weatherType(type) {}
 };
 
 // Comprehensive destination information structure
-struct Destination {
+struct Destination4 {
     string name;
     string type;               // beach, museum, mountain, park, etc.
     string description;
@@ -46,7 +46,7 @@ struct Destination {
     vector<string> bestSeasons;
     string priceRange;         // $, $$, $$$
     vector<string> activities;
-    Coordinates coords;
+    Coordinates4 coords;
     vector<pair<string, double>> nearbyDestinations;  // name and distance in km
     map<string, string> transportOptions;             // destination -> transport mode
     vector<string> bestTimeToVisit;
@@ -54,7 +54,7 @@ struct Destination {
     bool requiresBooking;
     int avgVisitDuration;                            // in hours
     vector<pair<string, string>> openingHours;       // day -> "HH:MM-HH:MM"
-    map<string, WeatherInfo> monthlyWeather;         // month -> weather info
+    map<string, WeatherInfo4> monthlyWeather;         // month -> weather info
     vector<string> languages;                        // Spoken languages
     vector<string> facilities;                       // Available facilities
     string difficulty;                               // Easy, Moderate, Difficult
@@ -62,13 +62,13 @@ struct Destination {
     vector<string> safetyTips;
     
     // Default constructor required for containers
-    Destination() : rating(0.0), requiresBooking(false), 
+    Destination4() : rating(0.0), requiresBooking(false), 
                    avgVisitDuration(0), wheelchairAccessible(false) {}
     
     // Main constructor with essential parameters
-    Destination(
+    Destination4(
         string n, string t, string desc, double r,
-        Coordinates c, vector<string> seasons = {},
+        Coordinates4 c, vector<string> seasons = {},
         string price = "$$"
     ) : name(n), type(t), description(desc), rating(r),
         coords(c), bestSeasons(seasons), priceRange(price),
@@ -77,15 +77,15 @@ struct Destination {
 };
 
 // TrieNode class for efficient prefix-based searching
-class TrieNode {
+class TrieNode4 {
 public:
-    unordered_map<char, TrieNode*> children;
+    unordered_map<char, TrieNode4*> children;
     bool isEndOfWord;
-    vector<Destination> destinations;
+    vector<Destination4> destinations;
     
-    TrieNode() : isEndOfWord(false) {}
+    TrieNode4() : isEndOfWord(false) {}
     
-    ~TrieNode() {
+    ~TrieNode4() {
         for (auto& pair : children) {
             delete pair.second;
         }
@@ -93,24 +93,24 @@ public:
 };
 
 // Main tourism recommendation system class
-class TourismRecommendationSystem {
+class TourismRecommendationSystem4 {
 private:
-    TrieNode* root;
-    unordered_map<string, Destination> allDestinations;
+    TrieNode4* root;
+    unordered_map<string, Destination4> allDestinations;
     
     // Convert string to lowercase for case-insensitive searches
-    string toLowerCase(const string& str) {
+    string toLowerCase4(const string& str) {
         string lower = str;
         transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
         return lower;
     }
     
     // Insert a keyword and destination into the trie
-    void insertIntoTrie(const string& keyword, const Destination& dest) {
-        TrieNode* node = root;
+    void insertIntoTrie4(const string& keyword, const Destination4& dest) {
+        TrieNode4* node = root;
         for (char c : keyword) {
             if (node->children.find(c) == node->children.end()) {
-                node->children[c] = new TrieNode();
+                node->children[c] = new TrieNode4();
             }
             node = node->children[c];
         }
@@ -119,7 +119,7 @@ private:
     }
     
     // Collect all destinations under a node
-    void collectDestinations(TrieNode* node, vector<Destination>& results) {
+    void collectDestinations4(TrieNode4* node, vector<Destination4>& results) {
         if (node == nullptr) return;
         
         if (node->isEndOfWord) {
@@ -129,17 +129,17 @@ private:
         }
         
         for (const auto& pair : node->children) {
-            collectDestinations(pair.second, results);
+            collectDestinations4(pair.second, results);
         }
     }
     
     // Calculate optimal route between destinations
-    vector<string> calculateRoute(const vector<Destination>& destinations) {
+    vector<string> calculateRoute4(const vector<Destination4>& destinations) {
         // Simple implementation - returns destinations sorted by distance
         vector<pair<double, string>> distances;
         for (const auto& dest : destinations) {
             distances.push_back({
-                dest.coords.distanceTo(destinations[0].coords),
+                dest.coords.distanceTo4(destinations[0].coords),
                 dest.name
             });
         }
@@ -153,32 +153,32 @@ private:
     }
 
 public:
-    TourismRecommendationSystem() {
-        root = new TrieNode();
+    TourismRecommendationSystem4() {
+        root = new TrieNode4();
     }
     
-    ~TourismRecommendationSystem() {
+    ~TourismRecommendationSystem4() {
         delete root;
     }
     
     // Print a separator line
-    void printSeparator(char c = '-', int length = 80) {
+    void printSeparator4(char c = '-', int length = 80) {
         cout << string(length, c) << endl;
     }
     
     // Insert a destination into the system
-    void insertDestination(const Destination& dest) {
+    void insertDestination4(const Destination4& dest) {
         // Insert using both name and type as keywords
-        insertIntoTrie(toLowerCase(dest.name), dest);
-        insertIntoTrie(toLowerCase(dest.type), dest);
+        insertIntoTrie4(toLowerCase4(dest.name), dest);
+        insertIntoTrie4(toLowerCase4(dest.type), dest);
         allDestinations[dest.name] = dest;
     }
     
     // Search destinations with prefix
-    vector<Destination> searchWithPrefix(const string& prefix) {
-        string lower = toLowerCase(prefix);
-        TrieNode* node = root;
-        vector<Destination> results;
+    vector<Destination4> searchWithPrefix4(const string& prefix) {
+        string lower = toLowerCase4(prefix);
+        TrieNode4* node = root;
+        vector<Destination4> results;
         
         // Navigate to prefix node
         for (char c : lower) {
@@ -189,21 +189,21 @@ public:
         }
         
         // Collect all destinations under this prefix
-        collectDestinations(node, results);
+        collectDestinations4(node, results);
         
         // Remove duplicates based on name
         sort(results.begin(), results.end(),
-             [](const Destination& a, const Destination& b) {
+             [](const Destination4& a, const Destination4& b) {
                  return a.name < b.name;
              });
         results.erase(unique(results.begin(), results.end(),
-                           [](const Destination& a, const Destination& b) {
+                           [](const Destination4& a, const Destination4& b) {
                                return a.name == b.name;
                            }), results.end());
         
         // Sort by rating
         sort(results.begin(), results.end(),
-             [](const Destination& a, const Destination& b) {
+             [](const Destination4& a, const Destination4& b) {
                  return a.rating > b.rating;
              });
              
@@ -211,17 +211,17 @@ public:
     }
     
     // Get detailed information about a destination
-    void getDestinationDetails(const string& name, const Coordinates& userLocation) {
+    void getDestinationDetails4(const string& name, const Coordinates4& userLocation) {
         if (allDestinations.find(name) == allDestinations.end()) {
             cout << "Destination not found!" << endl;
             return;
         }
         
-        const Destination& dest = allDestinations[name];
+        const Destination4& dest = allDestinations[name];
         
-        printSeparator('=');
+        printSeparator4('=');
         cout << "\033[1m" << dest.name << " (" << dest.type << ")\033[0m" << endl;
-        printSeparator();
+        printSeparator4();
         
         // Basic Information
         cout << "Rating: ";
@@ -232,7 +232,7 @@ public:
         cout << "Description: " << dest.description << endl;
         
         // Distance and Location
-        double distance = userLocation.distanceTo(dest.coords);
+        double distance = userLocation.distanceTo4(dest.coords);
         cout << "\nLocation Details:" << endl;
         cout << "Distance from your location: " 
              << fixed << setprecision(1) << distance << " km" << endl;
@@ -264,7 +264,7 @@ public:
         // Nearby Attractions with Route
         if (!dest.nearbyDestinations.empty()) {
             cout << "\nNearby Attractions:" << endl;
-            vector<Destination> nearbyDests;
+            vector<Destination4> nearbyDests;
             nearbyDests.push_back(dest);
             for (const auto& nearby : dest.nearbyDestinations) {
                 if (allDestinations.find(nearby.first) != allDestinations.end()) {
@@ -272,7 +272,7 @@ public:
                 }
             }
             
-            vector<string> route = calculateRoute(nearbyDests);
+            vector<string> route = calculateRoute4(nearbyDests);
             cout << "Suggested visiting order:" << endl;
             for (int i = 0; i < route.size(); i++) {
                 cout << "  " << i+1 << ". " << route[i] << endl;
@@ -287,60 +287,60 @@ public:
             }
         }
         
-        printSeparator('=');
+        printSeparator4('=');
     }
 };
 
 int main() {
-    TourismRecommendationSystem system;
+    TourismRecommendationSystem4 system;
     
     // Insert sample destinations with detailed information
-    Destination bondiBeach(
+    Destination4 bondiBeach4(
         "Bondi Beach",
         "beach",
         "Famous Australian beach known for surfing and coastal walks",
         4.7,
-        Coordinates(-33.8915, 151.2767),
+        Coordinates4(-33.8915, 151.2767),
         {"Summer", "Spring"},
         "$$"
     );
-    bondiBeach.activities = {"Surfing", "Swimming", "Sunbathing", "Coastal Walking"};
-    bondiBeach.safetyTips = {"Swim between the flags", "Apply sunscreen", "Stay hydrated"};
-    bondiBeach.difficulty = "Easy";
-    bondiBeach.languages = {"English"};
-    bondiBeach.openingHours = {{"Daily", "24 hours"}};
-    bondiBeach.facilities = {"Showers", "Restrooms", "Cafes", "Lifeguard"};
-    system.insertDestination(bondiBeach);
+    bondiBeach4.activities = {"Surfing", "Swimming", "Sunbathing", "Coastal Walking"};
+    bondiBeach4.safetyTips = {"Swim between the flags", "Apply sunscreen", "Stay hydrated"};
+    bondiBeach4.difficulty = "Easy";
+    bondiBeach4.languages = {"English"};
+    bondiBeach4.openingHours = {{"Daily", "24 hours"}};
+    bondiBeach4.facilities = {"Showers", "Restrooms", "Cafes", "Lifeguard"};
+    system.insertDestination4(bondiBeach4);
     
-    Destination louvre(
+    Destination4 louvre4(
         "Louvre Museum",
         "museum",
         "World's largest art museum and home to the Mona Lisa",
         4.8,
-        Coordinates(48.8606, 2.3376),
+        Coordinates4(48.8606, 2.3376),
         {"All year"},
         "$$$"
     );
-    louvre.activities = {"Art Viewing", "Guided Tours", "Photography"};
-    louvre.openingHours = {
+    louvre4.activities = {"Art Viewing", "Guided Tours", "Photography"};
+    louvre4.openingHours = {
         {"Monday", "Closed"},
         {"Tuesday-Sunday", "09:00-18:00"}
     };
-    louvre.requiresBooking = true;
-    louvre.languages = {"French", "English", "Spanish"};
-    louvre.wheelchairAccessible = true;
-    system.insertDestination(louvre);
+    louvre4.requiresBooking = true;
+    louvre4.languages = {"French", "English", "Spanish"};
+    louvre4.wheelchairAccessible = true;
+    system.insertDestination4(louvre4);
     
     // Predefined search queries and user location
     // Change here if you needed to try another search
     // Try to use beach, museum, Bondi
-    const vector<string> searchQueries = {"beach", "museum", "Bondi"}; 
-    const Coordinates userLocation(48.8584, 2.2945);  // Paris coordinates
+    const vector<string> searchQueries4 = {"beach", "museum", "Bondi"}; 
+    const Coordinates4 userLocation4(48.8584, 2.2945);  // Paris coordinates
     
     // Perform searches with predefined queries
-    for (const auto& query : searchQueries) {
+    for (const auto& query : searchQueries4) {
         cout << "\nSearching for: " << query << endl;
-        auto results = system.searchWithPrefix(query);
+        auto results = system.searchWithPrefix4(query);
         
         if (results.empty()) {
             cout << "No destinations found matching '" << query << "'" << endl;
@@ -348,7 +348,7 @@ int main() {
         }
         
         cout << "\nFound " << results.size() << " matching destinations:\n";
-        system.printSeparator();
+        system.printSeparator4();
         
         for (int i = 0; i < results.size(); i++) {
             cout << i + 1 << ". " << results[i].name 
@@ -358,7 +358,7 @@ int main() {
         
         // Get details for each found destination
         for (const auto& result : results) {
-            system.getDestinationDetails(result.name, userLocation);
+            system.getDestinationDetails4(result.name, userLocation4);
         }
     }
     

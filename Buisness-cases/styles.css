@@ -145,6 +145,10 @@ nav {
     color: var(--text-secondary);
     font-weight: 500;
 }
+.label1{
+    color: var(--text-secondary);
+    font-weight: 500;
+}
 
 .value {
     color: var(--text-primary);

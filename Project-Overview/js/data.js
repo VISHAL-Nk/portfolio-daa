@@ -1,9 +1,9 @@
 // Team member data
 export const teamMembers = [
     {
-        name: 'Vishal ',
-        rollNo: '248',
-        usn: '01FE23BCS294'
+        name: 'Devika',
+        rollNo: '217',
+        usn: '01FE23BCS089'
     },
     {
         name: 'Madhura',
@@ -11,14 +11,14 @@ export const teamMembers = [
         usn: '01FE23BCS103'
     },
     {
-        name: 'Devika',
-        rollNo: '217',
-        usn: '01FE23BCS089'
-    },
-    {
         name: 'Vaishnavi',
         rollNo: '227',
         usn: '01FE23BCS125'
+    },
+    {
+        name: 'Vishal ',
+        rollNo: '248',
+        usn: '01FE23BCS294'
     }
 ];
 
