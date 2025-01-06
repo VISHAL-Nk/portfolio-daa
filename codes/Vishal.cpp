@@ -335,7 +335,7 @@ int main() {
     // Change here if you needed to try another search
     // Try to use beach, museum, Bondi
     const vector<string> searchQueries4 = {"beach", "museum", "Bondi"}; 
-    const Coordinates4 userLocation4(48.8584, 2.2945);  // Paris coordinates
+    const Coordinates4 userLocation4(48.8584, 2.2945); 
     
     // Perform searches with predefined queries
     for (const auto& query : searchQueries4) {

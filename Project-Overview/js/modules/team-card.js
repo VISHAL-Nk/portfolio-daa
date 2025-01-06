@@ -4,10 +4,10 @@ export function createTeamCard(member, index) {
     // Set different links for each team member
     switch(index) {
         case 0:
-            card.href = 'TeamMember2/index.html';
+            card.href = 'https://sites.google.com/kletech.ac.in/daaportfoliobdiv218/home';
             break;
         case 1:
-            card.href = 'TeamMember3/index.html';
+            card.href = 'https://sites.google.com/kletech.ac.in/daaportfolio227/graph-algorithm';
             break;
         case 2:
             card.href = 'https://sites.google.com/kletech.ac.in/daa-portfolio-227/home';

@@ -92,86 +92,39 @@ std::vector<int> dijkstra2(const std::unordered_map<int, std::vector<std::pair<i
 }
 
 // Function to interact with the user and process the feedback dynamically
-void interactWithUser2(TwoThreeTree2& tree2) {
-    std::unordered_map<int, std::vector<std::pair<int, int>>> graph2;
-
-    // Sample road network (intersections and roads)
-    std::cout << "Enter the road network data (start intersection, end intersection, travel time):\n";
-    std::string input2;
-    while (true) {
-        std::cout << "Enter road data in format 'start end time' or type 'exit' to stop:\n";
-        std::getline(std::cin, input2);
-
-        if (input2 == "exit") break;
-
-        int start2, end2, time2;
-        std::stringstream ss2(input2);
-        if (!(ss2 >> start2 >> end2 >> time2)) {
-            std::cout << "Invalid input, please enter in 'start end time' format.\n";
-            continue;  // Skip invalid input
-        }
-
-        // Update the graph with the road data
-        graph2[start2].push_back({end2, time2});
-        graph2[end2].push_back({start2, time2});  // Assuming it's a bidirectional road
-
-        tree2.insert2(start2, time2);
-        tree2.insert2(end2, time2);
-    }
-
-    // Ask for the emergency vehicle's current location and destination
-    int currentLocation2, destination2;
-    std::cout << "Enter the current location of the emergency vehicle: ";
-    std::cin >> currentLocation2;
-    std::cout << "Enter the destination of the emergency: ";
-    std::cin >> destination2;
-
-    // Find the shortest path using Dijkstra's algorithm
-    std::vector<int> path2 = dijkstra2(graph2, currentLocation2, destination2);
-
-    // Display the optimized route
-    if (path2.empty()) {
-        std::cout << "No path found from " << currentLocation2 << " to " << destination2 << ".\n";
-    } else {
-        std::cout << "Optimal route: ";
-        for (int intersection2 : path2) {
-            std::cout << intersection2 << " ";
-        }
-        std::cout << "\n";
-    }
-}
 // void interactWithUser2(TwoThreeTree2& tree2) {
 //     std::unordered_map<int, std::vector<std::pair<int, int>>> graph2;
 
-//     // Predefined road network data using compile-time constants
-//     constexpr struct {
-//         int start2;
-//         int end2;
-//         int time2;
-//     } roadData2[] = {
-//         {1, 2, 5},  // Road from intersection 1 to 2, taking 5 minutes
-//         {2, 3, 3},  // Road from intersection 2 to 3, taking 3 minutes
-//         {1, 3, 7},  // Road from intersection 1 to 3, taking 7 minutes
-//         {3, 4, 2},  // Road from intersection 3 to 4, taking 2 minutes
-//         {2, 4, 6},  // Road from intersection 2 to 4, taking 6 minutes
-//         {4, 5, 4},  // Road from intersection 4 to 5, taking 4 minutes
-//         {3, 5, 8}   // Road from intersection 3 to 5, taking 8 minutes
-//     };
+//     // Sample road network (intersections and roads)
+//     std::cout << "Enter the road network data (start intersection, end intersection, travel time):\n";
+//     std::string input2;
+//     while (true) {
+//         std::cout << "Enter road data in format 'start end time' or type 'exit' to stop:\n";
+//         std::getline(std::cin, input2);
 
-//     // Build the graph with the predefined data at compile time
-//     for (const auto& road2 : roadData2) {
-//         // Add roads to the graph (bidirectional)
-//         graph2[road2.start2].push_back({road2.end2, road2.time2});
-//         graph2[road2.end2].push_back({road2.start2, road2.time2});
-        
-//         // Add intersections to the 2-3 tree
-//         tree2.insert2(road2.start2, road2.time2);
-//         tree2.insert2(road2.end2, road2.time2);
+//         if (input2 == "exit") break;
+
+//         int start2, end2, time2;
+//         std::stringstream ss2(input2);
+//         if (!(ss2 >> start2 >> end2 >> time2)) {
+//             std::cout << "Invalid input, please enter in 'start end time' format.\n";
+//             continue;  // Skip invalid input
+//         }
+
+//         // Update the graph with the road data
+//         graph2[start2].push_back({end2, time2});
+//         graph2[end2].push_back({start2, time2});  // Assuming it's a bidirectional road
+
+//         tree2.insert2(start2, time2);
+//         tree2.insert2(end2, time2);
 //     }
 
-//     // Predefined emergency scenario using compile-time constants
-//     constexpr int currentLocation2 = 1;  // Emergency vehicle starts at intersection 1
-//     constexpr int destination2 = 5;      // Destination is intersection 5
+//     // Ask for the emergency vehicle's current location and destination
+//     int currentLocation2, destination2;
+//     std::cout << "Enter the current location of the emergency vehicle: ";
+//     std::cin >> currentLocation2;
+//     std::cout << "Enter the destination of the emergency: ";
+//     std::cin >> destination2;
 
 //     // Find the shortest path using Dijkstra's algorithm
 //     std::vector<int> path2 = dijkstra2(graph2, currentLocation2, destination2);
@@ -187,6 +140,53 @@ void interactWithUser2(TwoThreeTree2& tree2) {
 //         std::cout << "\n";
 //     }
 // }
+void interactWithUser2(TwoThreeTree2& tree2) {
+    std::unordered_map<int, std::vector<std::pair<int, int>>> graph2;
+
+    // Predefined road network data using compile-time constants
+    constexpr struct {
+        int start2;
+        int end2;
+        int time2;
+    } roadData2[] = {
+        {1, 2, 5},  // Road from intersection 1 to 2, taking 5 minutes
+        {2, 3, 3},  // Road from intersection 2 to 3, taking 3 minutes
+        {1, 3, 7},  // Road from intersection 1 to 3, taking 7 minutes
+        {3, 4, 2},  // Road from intersection 3 to 4, taking 2 minutes
+        {2, 4, 6},  // Road from intersection 2 to 4, taking 6 minutes
+        {4, 5, 4},  // Road from intersection 4 to 5, taking 4 minutes
+        {3, 5, 8}   // Road from intersection 3 to 5, taking 8 minutes
+    };
+
+    // Build the graph with the predefined data at compile time
+    for (const auto& road2 : roadData2) {
+        // Add roads to the graph (bidirectional)
+        graph2[road2.start2].push_back({road2.end2, road2.time2});
+        graph2[road2.end2].push_back({road2.start2, road2.time2});
+        
+        // Add intersections to the 2-3 tree
+        tree2.insert2(road2.start2, road2.time2);
+        tree2.insert2(road2.end2, road2.time2);
+    }
+
+    // Predefined emergency scenario using compile-time constants
+    constexpr int currentLocation2 = 1;  // Emergency vehicle starts at intersection 1
+    constexpr int destination2 = 5;      // Destination is intersection 5
+
+    // Find the shortest path using Dijkstra's algorithm
+    std::vector<int> path2 = dijkstra2(graph2, currentLocation2, destination2);
+
+    // Display the optimized route
+    if (path2.empty()) {
+        std::cout << "No path found from " << currentLocation2 << " to " << destination2 << ".\n";
+    } else {
+        std::cout << "Optimal route: ";
+        for (int intersection2 : path2) {
+            std::cout << intersection2 << " ";
+        }
+        std::cout << "\n";
+    }
+}
 
 
 int main() {

@@ -2,7 +2,7 @@
 export const teamMembers = [
     {
         name: 'Devika',
-        rollNo: '217',
+        rollNo: '218',
         usn: '01FE23BCS089'
     },
     {
