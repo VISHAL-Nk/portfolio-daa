@@ -1,200 +1,174 @@
 #include <iostream>
 #include <vector>
-#include <queue>
-#include <climits>
 #include <unordered_map>
-#include <string>
-#include <set>
-#include <sstream>  // For stringstream to parse input
-#include <algorithm> // For std::reverse
+#include <queue>
+#include <limits>
+#include <algorithm>
 
-// Define the 2-3 Tree Node and Tree Structure
-struct TreeNode2 {
-    int value2; // The intersection ID or a similar unique identifier
-    std::vector<TreeNode2*> children2;  // Adjacent nodes (intersections)
-    std::vector<int> weights2;  // Edge weights (travel time or distance)
-    TreeNode2(int v) : value2(v) {}
+// Binary Search Tree Node
+struct BSTNode {
+    int key;
+    int value;
+    BSTNode* left;
+    BSTNode* right;
+
+    BSTNode(int k, int v) : key(k), value(v), left(nullptr), right(nullptr) {}
 };
 
-// 2-3 Tree class
-class TwoThreeTree2 {
+// Binary Search Tree
+class BST {
 private:
-    TreeNode2* root2;
+    BSTNode* root;
 
-    // Helper method to insert into 2-3 Tree (simplified version for the sake of the example)
-    void insertHelper2(TreeNode2* node2, int value2, int weight2) {
-        // For simplicity, we add values directly to the node if there's space.
-        // Full tree insertion logic with balancing is omitted for brevity.
-        node2->children2.push_back(new TreeNode2(value2));
-        node2->weights2.push_back(weight2);
+    BSTNode* insert(BSTNode* node, int key, int value) {
+        if (!node) return new BSTNode(key, value);
+        if (key < node->key)
+            node->left = insert(node->left, key, value);
+        else if (key > node->key)
+            node->right = insert(node->right, key, value);
+        return node;
     }
 
 public:
-    TwoThreeTree2() : root2(nullptr) {}
+    BST() : root(nullptr) {}
 
-    void insert2(int value2, int weight2) {
-        if (!root2) {
-            root2 = new TreeNode2(value2);
-        } else {
-            insertHelper2(root2, value2, weight2);
-        }
-    }
-
-    TreeNode2* getRoot2() {
-        return root2;
+    void insert(int key, int value) {
+        root = insert(root, key, value);
     }
 };
 
-// Dijkstra's Algorithm to find the shortest path
-std::vector<int> dijkstra2(const std::unordered_map<int, std::vector<std::pair<int, int>>>& graph2, int start2, int target2) {
-    // Priority queue to store (distance, node) pairs
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> pq2;
-    std::unordered_map<int, int> dist2;
-    std::unordered_map<int, int> parent2;
+// Lookup table to store precomputed shortest distances between nodes
+std::unordered_map<int, std::unordered_map<int, int>> lookupTable;
 
-    // Initialize distances and queue
-    for (const auto& node2 : graph2) {
-        dist2[node2.first] = INT_MAX;
+// Dijkstra's algorithm
+std::vector<int> dijkstra(const std::unordered_map<int, std::vector<std::pair<int, int>>>& graph, int start, int end) {
+    // Check lookup table first
+    if (lookupTable.find(start) != lookupTable.end() && lookupTable[start].find(end) != lookupTable[start].end()) {
+        std::cout << "Retrieved from lookup table: Distance = " << lookupTable[start][end] << "\n";
     }
-    dist2[start2] = 0;
-    pq2.push({0, start2});
 
-    while (!pq2.empty()) {
-        int u2 = pq2.top().second;
-        pq2.pop();
+    std::unordered_map<int, int> dist;
+    std::unordered_map<int, int> prev;
+    auto cmp = [](const std::pair<int, int>& a, const std::pair<int, int>& b) { return a.second > b.second; };
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(cmp)> pq(cmp);
 
-        // If the destination is reached, stop
-        if (u2 == target2) break;
+    for (const auto& node : graph) {
+        dist[node.first] = std::numeric_limits<int>::max();
+    }
+    dist[start] = 0;
+    pq.push({start, 0});
 
-        for (const auto& neighbor2 : graph2.at(u2)) {
-            int v2 = neighbor2.first;
-            int weight2 = neighbor2.second;
+    while (!pq.empty()) {
+        auto current_pair = pq.top();
+        int current = current_pair.first;
+        int d = current_pair.second;
+        pq.pop();
 
-            if (dist2[u2] + weight2 < dist2[v2]) {
-                dist2[v2] = dist2[u2] + weight2;
-                parent2[v2] = u2;
-                pq2.push({dist2[v2], v2});
+        if (current == end) break;
+
+        for (const auto& neighbor : graph.at(current)) {
+            int next = neighbor.first;
+            int weight = neighbor.second;
+            int newDist = d + weight;
+            if (newDist < dist[next]) {
+                dist[next] = newDist;
+                prev[next] = current;
+                pq.push({next, newDist});
             }
         }
     }
 
-    // Reconstruct the path
-    std::vector<int> path2;
-    if (parent2.find(target2) == parent2.end()) {
-        return path2;  // No path found
+    std::vector<int> path;
+    for (int at = end; prev.find(at) != prev.end(); at = prev[at]) {
+        path.push_back(at);
     }
-    for (int v2 = target2; v2 != start2; v2 = parent2[v2]) {
-        path2.push_back(v2);
-    }
-    path2.push_back(start2);
-    std::reverse(path2.begin(), path2.end());
-    return path2;
+    path.push_back(start);
+    std::reverse(path.begin(), path.end());
+
+    // Store result in lookup table
+    lookupTable[start][end] = dist[end];
+    lookupTable[end][start] = dist[end]; // Symmetric path
+
+    return path;
 }
 
-// Function to interact with the user and process the feedback dynamically
-// void interactWithUser2(TwoThreeTree2& tree2) {
-//     std::unordered_map<int, std::vector<std::pair<int, int>>> graph2;
+// Heap sort implementation
+void heapify(std::vector<std::tuple<int, int, int>>& arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
 
-//     // Sample road network (intersections and roads)
-//     std::cout << "Enter the road network data (start intersection, end intersection, travel time):\n";
-//     std::string input2;
-//     while (true) {
-//         std::cout << "Enter road data in format 'start end time' or type 'exit' to stop:\n";
-//         std::getline(std::cin, input2);
+    if (left < n && std::get<2>(arr[left]) > std::get<2>(arr[largest]))
+        largest = left;
 
-//         if (input2 == "exit") break;
+    if (right < n && std::get<2>(arr[right]) > std::get<2>(arr[largest]))
+        largest = right;
 
-//         int start2, end2, time2;
-//         std::stringstream ss2(input2);
-//         if (!(ss2 >> start2 >> end2 >> time2)) {
-//             std::cout << "Invalid input, please enter in 'start end time' format.\n";
-//             continue;  // Skip invalid input
-//         }
+    if (largest != i) {
+        std::swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
 
-//         // Update the graph with the road data
-//         graph2[start2].push_back({end2, time2});
-//         graph2[end2].push_back({start2, time2});  // Assuming it's a bidirectional road
+void heapSort(std::vector<std::tuple<int, int, int>>& arr) {
+    int n = arr.size();
 
-//         tree2.insert2(start2, time2);
-//         tree2.insert2(end2, time2);
-//     }
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
 
-//     // Ask for the emergency vehicle's current location and destination
-//     int currentLocation2, destination2;
-//     std::cout << "Enter the current location of the emergency vehicle: ";
-//     std::cin >> currentLocation2;
-//     std::cout << "Enter the destination of the emergency: ";
-//     std::cin >> destination2;
+    for (int i = n - 1; i > 0; i--) {
+        std::swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
 
-//     // Find the shortest path using Dijkstra's algorithm
-//     std::vector<int> path2 = dijkstra2(graph2, currentLocation2, destination2);
-
-//     // Display the optimized route
-//     if (path2.empty()) {
-//         std::cout << "No path found from " << currentLocation2 << " to " << destination2 << ".\n";
-//     } else {
-//         std::cout << "Optimal route: ";
-//         for (int intersection2 : path2) {
-//             std::cout << intersection2 << " ";
-//         }
-//         std::cout << "\n";
-//     }
-// }
-void interactWithUser2(TwoThreeTree2& tree2) {
-    std::unordered_map<int, std::vector<std::pair<int, int>>> graph2;
+// Interaction function
+void interactWithUser(BST& tree) {
+    std::unordered_map<int, std::vector<std::pair<int, int>>> graph;
 
     // Predefined road network data using compile-time constants
-    constexpr struct {
-        int start2;
-        int end2;
-        int time2;
-    } roadData2[] = {
-        {1, 2, 5},  // Road from intersection 1 to 2, taking 5 minutes
-        {2, 3, 3},  // Road from intersection 2 to 3, taking 3 minutes
-        {1, 3, 7},  // Road from intersection 1 to 3, taking 7 minutes
-        {3, 4, 2},  // Road from intersection 3 to 4, taking 2 minutes
-        {2, 4, 6},  // Road from intersection 2 to 4, taking 6 minutes
-        {4, 5, 4},  // Road from intersection 4 to 5, taking 4 minutes
-        {3, 5, 8}   // Road from intersection 3 to 5, taking 8 minutes
+    std::vector<std::tuple<int, int, int>> roadData = {
+        {1, 2, 5}, {2, 3, 3}, {1, 3, 7}, {3, 4, 2}, {2, 4, 6}, {4, 5, 4}, {3, 5, 8}
     };
 
-    // Build the graph with the predefined data at compile time
-    for (const auto& road2 : roadData2) {
-        // Add roads to the graph (bidirectional)
-        graph2[road2.start2].push_back({road2.end2, road2.time2});
-        graph2[road2.end2].push_back({road2.start2, road2.time2});
-        
-        // Add intersections to the 2-3 tree
-        tree2.insert2(road2.start2, road2.time2);
-        tree2.insert2(road2.end2, road2.time2);
+    // Sort roads by travel time using heap sort
+    heapSort(roadData);
+
+    // Build the graph with the sorted data
+    for (const auto& road : roadData) {
+        int start = std::get<0>(road);
+        int end = std::get<1>(road);
+        int time = std::get<2>(road);
+
+        graph[start].push_back({end, time});
+        graph[end].push_back({start, time});
+
+        // Add intersections to the binary search tree
+        tree.insert(start, time);
+        tree.insert(end, time);
     }
 
-    // Predefined emergency scenario using compile-time constants
-    constexpr int currentLocation2 = 1;  // Emergency vehicle starts at intersection 1
-    constexpr int destination2 = 5;      // Destination is intersection 5
+    // Predefined emergency scenario
+    constexpr int currentLocation = 1;
+    constexpr int destination = 5;
 
     // Find the shortest path using Dijkstra's algorithm
-    std::vector<int> path2 = dijkstra2(graph2, currentLocation2, destination2);
+    std::vector<int> path = dijkstra(graph, currentLocation, destination);
 
     // Display the optimized route
-    if (path2.empty()) {
-        std::cout << "No path found from " << currentLocation2 << " to " << destination2 << ".\n";
+    if (path.empty()) {
+        std::cout << "No path found from " << currentLocation << " to " << destination << ".\n";
     } else {
         std::cout << "Optimal route: ";
-        for (int intersection2 : path2) {
-            std::cout << intersection2 << " ";
+        for (int intersection : path) {
+            std::cout << intersection << " ";
         }
         std::cout << "\n";
     }
 }
 
-
 int main() {
-    // Create an empty 2-3 Tree for the road network
-    TwoThreeTree2 tree2;
-
-    // Interact with the user to collect road network data and emergency route
-    interactWithUser2(tree2);
-
+    BST tree;
+    interactWithUser(tree);
     return 0;
 }

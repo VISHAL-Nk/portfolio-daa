@@ -294,7 +294,9 @@ public:
 int main() {
     TourismRecommendationSystem4 system;
     
-    // Insert sample destinations with detailed information
+    // BEACHES
+    
+    // 1. Bondi Beach (Original)
     Destination4 bondiBeach4(
         "Bondi Beach",
         "beach",
@@ -311,7 +313,125 @@ int main() {
     bondiBeach4.openingHours = {{"Daily", "24 hours"}};
     bondiBeach4.facilities = {"Showers", "Restrooms", "Cafes", "Lifeguard"};
     system.insertDestination4(bondiBeach4);
+
+    // 2. Copacabana Beach (Previous)
+    Destination4 copacabana(
+        "Copacabana Beach",
+        "beach",
+        "Famous Brazilian beach known for its vibrant atmosphere and beach sports",
+        4.6,
+        Coordinates4(-22.9711, -43.1823),
+        {"Summer", "Spring"},
+        "$$"
+    );
+    copacabana.activities = {"Beach Volleyball", "Swimming", "Sunbathing", "People Watching"};
+    copacabana.safetyTips = {"Watch your belongings", "Stay hydrated", "Use sunscreen"};
+    copacabana.languages = {"Portuguese", "English", "Spanish"};
+    copacabana.facilities = {"Beach Chairs", "Restrooms", "Beach Bars", "Sports Areas"};
+    system.insertDestination4(copacabana);
+
+    // 3. Maya Bay (Previous)
+    Destination4 mayaBay(
+        "Maya Bay",
+        "beach",
+        "Stunning Thai beach surrounded by limestone cliffs, famous from 'The Beach' movie",
+        4.5,
+        Coordinates4(7.6784, 98.7594),
+        {"Winter", "Spring"},
+        "$$"
+    );
+    mayaBay.activities = {"Snorkeling", "Photography", "Swimming", "Boat Tours"};
+    mayaBay.safetyTips = {"Follow conservation rules", "Respect marine life", "Be careful of boats"};
+    mayaBay.difficulty = "Moderate";
+    mayaBay.openingHours = {{"Daily", "08:00-16:00"}};
+    system.insertDestination4(mayaBay);
+
+    // 4. Navagio Beach (Previous)
+    Destination4 navagio(
+        "Navagio Beach",
+        "beach",
+        "Famous shipwreck beach in Greece, also known as Smugglers Cove",
+        4.8,
+        Coordinates4(37.8594, 20.6247),
+        {"Summer", "Spring"},
+        "$$"
+    );
+    navagio.activities = {"Photography", "Swimming", "Boat Tours", "Cliff Viewing"};
+    navagio.safetyTips = {"Access only by boat", "Be careful on viewing platforms", "Check weather conditions"};
+    navagio.difficulty = "Moderate";
+    navagio.languages = {"Greek", "English"};
+    system.insertDestination4(navagio);
+
+    // NEW BEACHES
+
+    // 5. Whitehaven Beach
+    Destination4 whitehaven(
+        "Whitehaven Beach",
+        "beach",
+        "Pristine white sand beach in the Whitsundays, Australia",
+        4.9,
+        Coordinates4(-20.2867, 149.0333),
+        {"Spring", "Summer"},
+        "$$$"
+    );
+    whitehaven.activities = {"Scenic Flights", "Snorkeling", "Swimming", "Island Walking"};
+    whitehaven.safetyTips = {"Watch for jellyfish", "Take plenty of water", "Use sun protection"};
+    whitehaven.difficulty = "Easy";
+    whitehaven.languages = {"English"};
+    whitehaven.facilities = {"Limited facilities - bring supplies"};
+    system.insertDestination4(whitehaven);
+
+    // 6. Anse Source d'Argent
+    Destination4 anseSource(
+        "Anse Source d'Argent",
+        "beach",
+        "Iconic beach with granite boulders in Seychelles",
+        4.8,
+        Coordinates4(-4.3667, 55.8333),
+        {"All year"},
+        "$$$"
+    );
+    anseSource.activities = {"Photography", "Swimming", "Sunbathing", "Rock Climbing"};
+    anseSource.safetyTips = {"Respect local wildlife", "Watch tide times", "Bring water"};
+    anseSource.languages = {"English", "French", "Creole"};
+    anseSource.difficulty = "Easy";
+    system.insertDestination4(anseSource);
+
+    // 7. Tulum Beach
+    Destination4 tulum(
+        "Tulum Beach",
+        "beach",
+        "Mexican beach with ancient Mayan ruins overlooking turquoise waters",
+        4.7,
+        Coordinates4(20.2114, -87.4295),
+        {"Winter", "Spring"},
+        "$$"
+    );
+    tulum.activities = {"Archaeological Tours", "Swimming", "Yoga", "Photography"};
+    tulum.facilities = {"Restaurants", "Beach Clubs", "Restrooms", "Archaeological Site"};
+    tulum.languages = {"Spanish", "English"};
+    tulum.safetyTips = {"Protect from sun", "Stay hydrated", "Respect archaeological sites"};
+    system.insertDestination4(tulum);
+
+    // 8. Waikiki Beach
+    Destination4 waikiki(
+        "Waikiki Beach",
+        "beach",
+        "Famous Hawaiian beach with perfect waves for surfing",
+        4.6,
+        Coordinates4(21.2767, -157.8368),
+        {"All year"},
+        "$$$"
+    );
+    waikiki.activities = {"Surfing", "Canoe Riding", "Swimming", "Sunset Watching"};
+    waikiki.facilities = {"Hotels", "Restaurants", "Surf Schools", "Shopping"};
+    waikiki.languages = {"English", "Japanese", "Hawaiian"};
+    waikiki.openingHours = {{"Daily", "24 hours"}};
+    system.insertDestination4(waikiki);
+
+    // MUSEUMS (Previous)
     
+    // 1. Louvre Museum
     Destination4 louvre4(
         "Louvre Museum",
         "museum",
@@ -322,22 +442,101 @@ int main() {
         "$$$"
     );
     louvre4.activities = {"Art Viewing", "Guided Tours", "Photography"};
-    louvre4.openingHours = {
-        {"Monday", "Closed"},
-        {"Tuesday-Sunday", "09:00-18:00"}
-    };
+    louvre4.openingHours = {{"Monday", "Closed"}, {"Tuesday-Sunday", "09:00-18:00"}};
     louvre4.requiresBooking = true;
     louvre4.languages = {"French", "English", "Spanish"};
     louvre4.wheelchairAccessible = true;
     system.insertDestination4(louvre4);
+
+    // 2. British Museum
+    Destination4 britishMuseum(
+        "British Museum",
+        "museum",
+        "World-renowned museum of human history and culture",
+        4.7,
+        Coordinates4(51.5194, -0.1270),
+        {"All year"},
+        "Free"
+    );
+    britishMuseum.activities = {"Historical Exhibits", "Guided Tours", "Educational Programs"};
+    britishMuseum.openingHours = {{"Daily", "10:00-17:00"}, {"Friday", "10:00-20:30"}};
+    britishMuseum.languages = {"English", "Multiple Audio Guides"};
+    britishMuseum.wheelchairAccessible = true;
+    system.insertDestination4(britishMuseum);
+
+    // 3. Vatican Museums
+    Destination4 vaticanMuseums(
+        "Vatican Museums",
+        "museum",
+        "Historic museums featuring extensive collection of art and Sistine Chapel",
+        4.9,
+        Coordinates4(41.9064, 12.4534),
+        {"All year"},
+        "$$$"
+    );
+    vaticanMuseums.activities = {"Art Viewing", "Religious History", "Guided Tours"};
+    vaticanMuseums.openingHours = {{"Monday-Saturday", "09:00-18:00"}, {"Sunday", "Closed"}};
+    vaticanMuseums.requiresBooking = true;
+    vaticanMuseums.languages = {"Italian", "English", "Spanish", "French", "German"};
+    system.insertDestination4(vaticanMuseums);
+
+    // PARKS (Previous)
     
-    // Predefined search queries and user location
-    // Change here if you needed to try another search
-    // Try to use beach, museum, Bondi
-    const vector<string> searchQueries4 = {"beach", "museum", "Bondi"}; 
+    // 1. Central Park
+    Destination4 centralPark(
+        "Central Park",
+        "park",
+        "Iconic urban park in the heart of New York City",
+        4.8,
+        Coordinates4(40.7829, -73.9654),
+        {"Spring", "Summer", "Fall"},
+        "Free"
+    );
+    centralPark.activities = {"Walking", "Boating", "Ice Skating", "Zoo Visits", "Concerts"};
+    centralPark.openingHours = {{"Daily", "06:00-01:00"}};
+    centralPark.facilities = {"Restrooms", "Cafes", "Playgrounds", "Sports Fields"};
+    centralPark.wheelchairAccessible = true;
+    system.insertDestination4(centralPark);
+
+    // 2. Hyde Park
+    Destination4 hydePark(
+        "Hyde Park",
+        "park",
+        "Historic park in central London with various attractions",
+        4.7,
+        Coordinates4(51.5073, -0.1657),
+        {"All year"},
+        "Free"
+    );
+    hydePark.activities = {"Boating", "Swimming", "Horse Riding", "Cycling", "Speakers' Corner"};
+    hydePark.facilities = {"Cafes", "Restrooms", "Bike Rental", "Swimming Pool"};
+    hydePark.wheelchairAccessible = true;
+    system.insertDestination4(hydePark);
+
+    // HOSPITALS (Previous)
+    
+    // 1. Mayo Clinic
+    Destination4 mayoClinic(
+        "Mayo Clinic",
+        "hospital",
+        "World-renowned medical center known for exceptional care",
+        4.9,
+        Coordinates4(44.0225, -92.4669),
+        {"All year"},
+        "$$$"
+    );
+    mayoClinic.activities = {"Medical Consultations", "Health Checkups", "Specialized Treatment"};
+    mayoClinic.openingHours = {{"24/7", "Always Open"}};
+    mayoClinic.languages = {"English", "Spanish", "Arabic", "Chinese"};
+    mayoClinic.facilities = {"Emergency Room", "Pharmacy", "Cafeteria", "Chapel", "Hotel"};
+    mayoClinic.wheelchairAccessible = true;
+    system.insertDestination4(mayoClinic);
+
+    // Search functionality
+    const vector<string> searchQueries4 ={"beach"}; 
     const Coordinates4 userLocation4(48.8584, 2.2945); 
     
-    // Perform searches with predefined queries
+    // Perform searches
     for (const auto& query : searchQueries4) {
         cout << "\nSearching for: " << query << endl;
         auto results = system.searchWithPrefix4(query);
@@ -350,17 +549,39 @@ int main() {
         cout << "\nFound " << results.size() << " matching destinations:\n";
         system.printSeparator4();
         
-        for (int i = 0; i < results.size(); i++) {
+        for (int i = 0; i < results.size() ; i++) {
             cout << i + 1 << ". " << results[i].name 
                  << " (" << results[i].type << ") - "
                  << results[i].rating << "*" << endl;
         }
         
-        // Get details for each found destination
-        for (const auto& result : results) {
-            system.getDestinationDetails4(result.name, userLocation4);
+        for (int i = 0; i < results.size() && i<5; i++) {
+            system.getDestinationDetails4(results[i].name, userLocation4);
         }
     }
     
     return 0;
 }
+
+// Data inside
+// BEACHES
+// 1. Bondi Beach 
+// 2. Copacabana Beach 
+// 3. Maya Bay 
+// 4. Navagio Beach 
+// 5. Whitehaven Beach
+// 6. Anse Source d'Argent
+// 7. Tulum Beach
+// 8. Waikiki Beach
+
+// MUSEUMS 
+// 1. Louvre Museum
+// 2. British Museum
+// 3. Vatican Museums
+
+// PARKS 
+// 1. Central Park
+// 2. Hyde Park
+
+// HOSPITALS 
+// 1. Mayo Clinic
